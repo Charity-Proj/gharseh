@@ -22,7 +22,6 @@ function App() {
           <Routes>
 
 
-
           </Routes>
         </Layout>
       </BrowserRouter>
