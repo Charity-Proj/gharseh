@@ -2,9 +2,10 @@ import React from "react";
 
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 
-import slider1 from "../../images/slider-1.jpg";
-import slider2 from "../../images/slider-2.jpg";
-import slider3 from "../../images/slider-3.jpg";
+import slider1 from "../../assets/slider-1.jpg";
+import slider2 from "../../assets/slider-2.jpg";
+import slider3 from "../../assets/slider-3.jpg";
+import { Link } from "react-router-dom";
 
 function Slider() {
   return (
@@ -41,9 +42,9 @@ function Slider() {
               البشرية غير المستدامة
             </Typography>
             <div className="flex justify-center gap-2">
-              <Button size="lg" color="green">
+              <Link to='/services'><Button size="lg" color="green">
                 تبرع بشجرة
-              </Button>
+              </Button></Link>
             </div>
           </div>
         </div>
@@ -75,9 +76,9 @@ function Slider() {
               وقدم طلبك للتطوع لزراعة الأشجار، فالطبيعة تنتظر مساهمتك
             </Typography>
             <div className="flex justify-center gap-2">
-              <Button size="lg" color="green">
+             <Link to='/Signup'><Button size="lg" color="green">
                 تطوع الآن
-              </Button>
+              </Button></Link> 
             </div>
           </div>
         </div>
@@ -108,9 +109,9 @@ function Slider() {
               والأكسجين ومساحات للترفيه ايضاً
             </Typography>
             <div className="flex justify-center gap-2">
-              <Button size="lg" color="green">
+              <Link to='/Signup'><Button size="lg" color="green">
                 !انضم إلينا
-              </Button>
+              </Button></Link>
             </div>
           </div>
         </div>

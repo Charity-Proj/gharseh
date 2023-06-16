@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
@@ -22,9 +23,9 @@ const About = () => {
                 الرائع، وأن الحفاظ على توازنه وجماله هو واجب علينا
               </p>
               <div className="flex justify-end gap-2">
-                <button className="flex justify-end bg-green-500 text-white text-2xl font-bold px-4 py-2 rounded shadow">
+               <Link to='/Signup'> <button className="flex justify-end bg-green-500 text-white text-2xl font-bold px-4 py-2 rounded shadow">
                   انضم لفريقنا
-                </button>
+                </button></Link>
               </div>
             </div>
           </header>

@@ -42,7 +42,7 @@ const Service = () => {
             />
             <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
             <div className="text-sm absolute top-0 right-0 bg-green-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 transition duration-500 ease-in-out">
-            <i class="fas fa-seedling"></i>
+            <i className="fas fa-seedling"></i>
             </div>
         </div>
         <div className="px-6  font-bold py-4">
@@ -60,7 +60,7 @@ const Service = () => {
             />
             <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
             <div className="text-sm absolute top-0 right-0 bg-green-600 px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 transition duration-500 ease-in-out">
-            <i class="fas fa-tint"></i>
+            <i className="fas fa-tint"></i>
             </div>
         </div>
         <div className="px-6 font-bold py-4">

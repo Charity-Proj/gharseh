@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Donate = () => {
   return (
@@ -23,12 +24,11 @@ const Donate = () => {
               </p>
               <div className="max-w-md mx-auto mt-5 sm:flex sm:justify-center md:mt-8">
                 <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                  <a
-                    href=""
+                  <Link to='/services'
                     className="block shadow-lg w-full px-8 py-3 text-base font-bold text-gray-200 hover:text-gray-100 bg-green-200/10 hover:bg-green-200/30 hover:backdrop-blur-xl backdrop-blur-lg rounded-md md:py-4 md:text-lg md:px-10"
                   >
                     تبرع للطبيعة
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

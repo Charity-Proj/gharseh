@@ -4,11 +4,12 @@ import {
   MobileNav,
   Typography,
   Button,
-  IconButton
+  IconButton,
+  Collapse,
 } from "@material-tailwind/react";
 
-import logo from '../images/logo.png';
-
+import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -28,9 +29,9 @@ export default function NavBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center text-lg font-bold">
+        <Link to="/" className="flex items-center text-lg font-bold">
           الرئيسية
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -38,9 +39,9 @@ export default function NavBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center text-lg font-bold">
+        <Link to="/Services" className="flex items-center text-lg font-bold">
           الفعاليات
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -48,9 +49,9 @@ export default function NavBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center text-lg font-bold">
+        <Link to="/About" className="flex items-center text-lg font-bold">
           قصتنا
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -58,33 +59,35 @@ export default function NavBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center text-lg font-bold">
+        <Link to="/Contact" className="flex items-center text-lg font-bold">
           اتصل بنا
-        </a>
+        </Link>
       </Typography>
     </ul>
   );
 
   return (
     <>
-      <Navbar className="inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4" dir="rtl">
-        <div className="flex items-end justify-center text-blue-gray-900">
-          <Typography
-            as="a"
-            href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
-          >
-            <img src={logo} alt="logo" width={"70"} />
+      <Navbar
+        className="inset-0 z-10 h-max max-w-full rounded-none py-2 px-4"
+        dir="rtl"
+      >
+        <div className="flex items-center lg:justify-between md:justify-between justify-between text-blue-gray-900">
+          <Typography as="a" href="/" className="cursor-pointer font-medium">
+            <img src={logo} alt="logo" className="h-auto w-14" />
           </Typography>
           <div className="flex items-end gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-            <Button
-              variant="gradient"
-              size="sm"
-              className="hidden lg:inline-block bg-green-500"
-            >
-              <span>تسجيل دخول</span>
-            </Button>
+            <Link smooth={true} to="/Login">
+              <Button
+                variant="gradient"
+                size="sm"
+                color="green"
+                className="hidden lg:inline-block bg-green-500"
+              >
+                <span>تسجيل دخول</span>
+              </Button>
+            </Link>
             <IconButton
               variant="text"
               className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -123,15 +126,22 @@ export default function NavBar() {
               )}
             </IconButton>
           </div>
+          <div className="lg:block hidden" width="15px"></div>
         </div>
-        <MobileNav open={openNav}>
+
+        <Collapse open={openNav}>
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="bg-green-500 mb-2">
+          <Button
+            variant="gradient"
+            color="green"
+            size="sm"
+            fullWidth
+            className="bg-green-500 mb-2"
+          >
             <span>تسجيل دخول</span>
           </Button>
-        </MobileNav>
+        </Collapse>
       </Navbar>
-
     </>
   );
 }

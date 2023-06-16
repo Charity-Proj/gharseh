@@ -1,4 +1,6 @@
+import { Progress } from "@material-tailwind/react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Service = () => {
   return (
@@ -12,17 +14,20 @@ const Service = () => {
           />
         </div>
         <div className="p-4">
-          <div className="text-lg font-medium text-gray-800  mb-2">
+          <div className="text-lg font-medium text-gray-800  mb-3">
             اسم الفعالية او المكان
           </div>
-          <p className="text-gray-500 text-sm">وصف الفعالية </p>
+          <p className="text-gray-600 text-sm">وصف الفعالية 
+          </p>
+          <p className="text-gray-600 mb-1 text-sm">الهدف: {"5"} دينار من {"100"} دينار</p>
+          <Progress value={50} color="green" className="bg-green-200" />
           <div className="flex gap-3 max-w-sm mt-2">
           <button className="py-2.5 px-6 rounded-lg text-sm font-bold bg-green-200 text-teal-800">
               تفاصيل
             </button>
-            <button className="py-2.5 px-6 rounded-lg text-sm font-bold text-white bg-green-600">
+            <Link to='/Payment'><button className="py-2.5 px-6 rounded-lg text-sm font-bold text-white bg-green-600">
               تبرع الآن
-            </button>
+            </button></Link>
           </div>
         </div>
       </div>
