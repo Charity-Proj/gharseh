@@ -96,10 +96,11 @@ export default function SignUp() {
                         <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
                             <div className='h-44 w-full flex items-center justify-center flex-col'><h1 className='text-4xl font-bold   '>انشاء حساب</h1> <div className='w-16 ml-28 mt-2 h-1 bg-gradient-to-r  from-slate-700 to-green-300'></div></div>
                             <form onSubmit={handleSubmit}>
-                                <div className='full flex flex-row justify-between items-center mb-5'>
-                                    <label>
+                                <div className='full flex flex-row justify-center items-center mb-5' dir='rtl'>
+                                    <label className='mx-2'>
                                         <input
                                             type='radio'
+                                            className='me-1 accent-green-500'
                                             name='role'
                                             value='volunteer'
                                             checked={formData.role === 'volunteer'}
@@ -114,6 +115,7 @@ export default function SignUp() {
                                             value='benefactor'
                                             checked={formData.role === 'benefactor'}
                                             onChange={handleChange}
+                                            className='me-1 accent-green-500'
                                         />
                                         متطوع
                                     </label>
