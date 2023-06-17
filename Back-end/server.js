@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/api',require('./routers/auth'));
 app.use('/api',require('./routers/Payment'));
+app.use('/api',require('./routers/volunteer'));
 
 app.use(errorHandler)
 
