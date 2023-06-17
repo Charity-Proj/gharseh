@@ -1,11 +1,17 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import '../regesration/style.css';
-
+import { AuthContext } from '../Context/AuthContext';
 import Hero from '../assets/hero.png';
+import { UserContext } from "../Context/UserContext";
 
 export default function SignUp() {
+    let { auth, setAuth, refresh } = useContext(AuthContext);
+    let { user, setUser, userRefresh } = useContext(UserContext);
+
+    const Navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -66,6 +72,11 @@ export default function SignUp() {
                     userData
                 );
                 localStorage.setItem('token', response.data.jwttoken);
+                setAuth(true);
+                userRefresh()
+                refresh()
+                Navigate('/');
+                
                 setErrors({});
                 setFormData({
                     name: '',
@@ -96,10 +107,11 @@ export default function SignUp() {
                         <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
                             <div className='h-44 w-full flex items-center justify-center flex-col'><h1 className='text-4xl font-bold   '>انشاء حساب</h1> <div className='w-16 ml-28 mt-2 h-1 bg-gradient-to-r  from-slate-700 to-green-300'></div></div>
                             <form onSubmit={handleSubmit}>
-                                <div className='full flex flex-row justify-between items-center mb-5'>
-                                    <label>
+                                <div className='full flex flex-row justify-center items-center mb-5' dir='rtl'>
+                                    <label className='mx-2'>
                                         <input
                                             type='radio'
+                                            className='me-1 accent-green-500'
                                             name='role'
                                             value='volunteer'
                                             checked={formData.role === 'volunteer'}
@@ -114,6 +126,7 @@ export default function SignUp() {
                                             value='benefactor'
                                             checked={formData.role === 'benefactor'}
                                             onChange={handleChange}
+                                            className='me-1 accent-green-500'
                                         />
                                         متطوع
                                     </label>
@@ -150,14 +163,7 @@ export default function SignUp() {
                                     </div>
                                     <div className='w-full flex items-end   mr-2 justify-end'>{errors.password && <span className='text-red-600'>{errors.password}</span>}</div>
                                 </div>
-                                <div className="mb-6 flex items-center justify-between mt-5">
-
-
-
-                                    <Link
-                                        to="/ForgotPassword"
-                                        className=" text-sm text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-                                    >هل نسيت كلمة السر؟</Link>
+                                <div className="mb-6 flex items-center justify-between mt-5" dir='rtl'>
                                     <Link
                                         to="/Login"
                                         className=" text-sm text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
