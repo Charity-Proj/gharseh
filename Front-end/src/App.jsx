@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import Orderhistory from './components/userprofile/orderhistory';
 import { Userprofile } from './pages/Userprofile';
 import { Profilehome } from './components/userprofile/profilehome';
+import { VolunteerHistory } from './components/userprofile/volunteerHistory';
 
 function App() {
   const ScrollToTop = () => {
