@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Layout from './layout/layout';
+import { Home } from './pages/Home';
+import Orderhistory from './components/userprofile/orderhistory';
+import { Userprofile } from './pages/Userprofile';
+import { Profilehome } from './components/userprofile/profilehome';
+import { VolunteerHistory } from './components/userprofile/volunteerHistory';
 
 import Signup from './regesration/Signup';
 import Login from './regesration/Login';
@@ -31,9 +36,12 @@ function App() {
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/Passwordrest/:resetToken" element={<ResetPassword />} />
             <Route path="/Payment" element={<Payment />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+            <Route path='/' element={<Home />} />
+            <Route path='/userprofile' element={<Userprofile />} />
+
+          </Routes >
+        </Layout >
+      </BrowserRouter >
     </>
   )
 }
