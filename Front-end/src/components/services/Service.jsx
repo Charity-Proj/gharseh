@@ -22,9 +22,11 @@ const Service = () => {
           <p className="text-gray-600 mb-1 text-sm">الهدف: {"5"} دينار من {"100"} دينار</p>
           <Progress value={50} color="green" className="bg-green-200" />
           <div className="flex gap-3 max-w-sm mt-2">
+            <Link to={`/Details/${1}`}>
           <button className="py-2.5 px-6 rounded-lg text-sm font-bold bg-green-200 text-teal-800">
               تفاصيل
             </button>
+            </Link>
             <Link to='/Payment'><button className="py-2.5 px-6 rounded-lg text-sm font-bold text-white bg-green-600">
               تبرع الآن
             </button></Link>

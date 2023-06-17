@@ -12,22 +12,22 @@ import { useState, useEffect } from "react";
 
 function About() {
 
-//   const [aboutUsData, setAboutUsData] = useState({});
+  //   const [aboutUsData, setAboutUsData] = useState({});
 
-//   useEffect(() => {
-//     const getAboutData = async () => {
-//       try {
-//         const response = await axios.get('http://localhost:5000/aboutus');
-//         setAboutUsData(response.data);
-//       } 
-//       catch (error) 
-//       {
-//         console.error('Error fetching data:', error);
-//       }
-//     };
+  //   useEffect(() => {
+  //     const getAboutData = async () => {
+  //       try {
+  //         const response = await axios.get('http://localhost:5000/aboutus');
+  //         setAboutUsData(response.data);
+  //       } 
+  //       catch (error) 
+  //       {
+  //         console.error('Error fetching data:', error);
+  //       }
+  //     };
 
-//     getAboutData();
-//   }, []);
+  //     getAboutData();
+  //   }, []);
 
   return (
     <>
@@ -50,8 +50,8 @@ function About() {
                     الصفحة الرئيسية
                   </Link>
                   <svg fill="none" className="w-4 mx-1" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>       
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  </svg>
                 </li>
                 <li>قصتنا</li>
               </ol>
@@ -67,7 +67,7 @@ function About() {
           <div>
             <span className="text-gray-700 text-lg font-semibold"></span>
             <h2 className="mt-4 text-6xl text-green-500 text-center font-bold md:text-4xl">
-        مميزاتنا
+              مميزاتنا
             </h2>
           </div>
           <div className="mt-16 grid border divide-x divide-y rounded-xl overflow-hidden sm:grid-cols-2 lg:divide-y-0 lg:grid-cols-3 xl:grid-cols-4">
@@ -82,7 +82,7 @@ function About() {
                 />
                 <div className="space-y-2">
                   <h5 className="text-xl text-gray-800 font-medium transition group-hover:text-green-900">
-                  ضمان زراعة الشجرة
+                    ضمان زراعة الشجرة
                   </h5>
                   <p className="text-sm text-gray-600">
                     يتم توثيق عملية زراعة الشجرة
@@ -789,7 +789,7 @@ function About() {
               فريقنا
             </h2>
             <p className="text-center text-lg font-bold text-black lg:mx-auto lg:w-8/12">
-               تعرف على فريقنا المذهل    
+              تعرف على فريقنا المذهل
             </p>
           </div>
           <div className="grid gap-24 md:grid-cols-3 md:gap-12">
