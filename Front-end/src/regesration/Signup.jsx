@@ -1,11 +1,17 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import '../regesration/style.css';
-
+import { AuthContext } from '../Context/AuthContext';
 import Hero from '../assets/hero.png';
+import { UserContext } from "../Context/UserContext";
 
 export default function SignUp() {
+    let { auth, setAuth, refresh } = useContext(AuthContext);
+    let { user, setUser, userRefresh } = useContext(UserContext);
+
+    const Navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -66,6 +72,11 @@ export default function SignUp() {
                     userData
                 );
                 localStorage.setItem('token', response.data.jwttoken);
+                setAuth(true);
+                userRefresh()
+                refresh()
+                Navigate('/');
+                
                 setErrors({});
                 setFormData({
                     name: '',
@@ -152,14 +163,7 @@ export default function SignUp() {
                                     </div>
                                     <div className='w-full flex items-end   mr-2 justify-end'>{errors.password && <span className='text-red-600'>{errors.password}</span>}</div>
                                 </div>
-                                <div className="mb-6 flex items-center justify-between mt-5">
-
-
-
-                                    <Link
-                                        to="/ForgotPassword"
-                                        className=" text-sm text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-                                    >هل نسيت كلمة السر؟</Link>
+                                <div className="mb-6 flex items-center justify-between mt-5" dir='rtl'>
                                     <Link
                                         to="/Login"
                                         className=" text-sm text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"

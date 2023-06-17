@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import {  useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Layout from './Layout/Layout';
@@ -14,8 +14,9 @@ import About from './pages/About';
 import ContactUs from './pages/Contact';
 import Details from './pages/Details';
 
-
 function App() {
+
+ 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -34,7 +35,6 @@ function App() {
           <Routes>
             <Route index path="/" element={<Home/>} />
             <Route path='/services' element={<Services/>}/>             
-            <Route path='/services' element={<Services/>}/>
             <Route path="/Signup" element={<Signup />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
