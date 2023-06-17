@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 const Popup = ({ toggle, setToggle }) => {
+
+  console.log(toggle)
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -81,7 +83,7 @@ const Popup = ({ toggle, setToggle }) => {
       <>
         {toggle &&
 
-          <div className="w-full flex items-center justify-center ">
+          <div className="w-full flex items-center justify-center " dir='ltr'> 
             <div
               className="overflow-x-hidden overflow-y-auto bg-gray-400/70 fixed h-modal md:h-full md:inset-0 z-50 justify-center items-center"
             >
@@ -205,7 +207,8 @@ const Popup = ({ toggle, setToggle }) => {
                 </div>
               </div>
             </div>
-          </div>}
+          </div>
+          }
       </>
 
 
