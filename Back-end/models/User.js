@@ -30,7 +30,10 @@ const UserSchema = new mongoose.Schema(
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
+    volunteering: [{ eventName: String }],
+    payment: [{ date: String, amount: Number, eventName: String }],
   },
+  
   {
     timestamps: true,
   }
