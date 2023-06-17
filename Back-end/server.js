@@ -14,7 +14,9 @@ app.use(express.json({limit: "50mb"}));
 app.use(cors());
 app.use('/api',require('./routers/auth'));
 app.use('/api',require('./routers/Payment'));
+app.use('/api',require('./routers/volunteer'));
 app.use(require('./routers/user'));
+
 
 app.use(errorHandler)
 
