@@ -93,7 +93,7 @@ export default function SignUp() {
     };
     return (
         <>
-            <section className="h-screen hero ">
+            <section className="h-screen hero "  dir="ltr">
                 <div className="container h-full px-6 py-24">
                     <div
                         className="pl-60 mt-14 g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
