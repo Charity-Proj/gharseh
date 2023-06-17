@@ -82,10 +82,10 @@ export default function payment() {
   };
   return (
     <>
-      <div className="w-full flex items-center justify-center flex-row h-screen gap-20">
+      <div className="w-full flex items-center justify-center flex-row h-screen gap-20" dir="ltr">
         <div className="grid sm:px-10 lg:grid-cols-2  justify-center">
           <img
-            className="-z-10 left-0  absolute top-24 lg:block md:hidden hidden h-screen w-[50vw] object-cover opacity-90"
+            className="-z-10 left-0  absolute top-20 lg:block md:hidden hidden h-screen w-[50vw] object-cover opacity-90"
             src={Hero}
             alt="Background"
           />
