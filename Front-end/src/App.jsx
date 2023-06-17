@@ -3,11 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Layout from './layout/layout';
 import { Home } from './pages/Home';
-import Orderhistory from './components/userprofile/orderhistory';
 import { Userprofile } from './pages/Userprofile';
-import { Profilehome } from './components/userprofile/profilehome';
-import { VolunteerHistory } from './components/userprofile/volunteerHistory';
-
 import Signup from './regesration/Signup';
 import Login from './regesration/Login';
 import ForgotPassword from './regesration/forgotPassword';
