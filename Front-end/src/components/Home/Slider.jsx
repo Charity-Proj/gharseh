@@ -15,6 +15,7 @@ function Slider() {
       transition={{ type: "tween", duration: 0.5 }}
       className=""
       style={{ height: "75vh" }}
+      dir="ltr"
     >
       <div className="relative w-full">
         <img

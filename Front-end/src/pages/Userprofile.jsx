@@ -9,7 +9,7 @@ import Orderhistory from '../components/userprofile/orderhistory';
 import { Profilehome } from '../components/userprofile/profilehome';
 import { VolunteerHistory } from '../components/userprofile/volunteerHistory';
 
-export const Userprofile = () => {
+const Userprofile = () => {
     const navigate = useNavigate()
     const [activeLink, setActiveLink] = useState("home");
 
@@ -148,3 +148,6 @@ export const Userprofile = () => {
 
     )
 }
+
+
+export default Userprofile;

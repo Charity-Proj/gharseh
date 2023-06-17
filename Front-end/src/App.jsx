@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Layout from './layout/layout';
-import { Home } from './pages/Home';
-import { Userprofile } from './pages/Userprofile';
+import Userprofile  from './pages/Userprofile';
 import Signup from './regesration/Signup';
 import Login from './regesration/Login';
 import ForgotPassword from './regesration/forgotPassword';
@@ -41,7 +40,7 @@ function App() {
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/Passwordrest/:resetToken" element={<ResetPassword />} />
             <Route path="/Payment" element={<Payment />} />
-            <Route path='/userprofile' element={<Userprofile />} />
+            <Route path='/userprofile/:id' element={<Userprofile />} />
             <Route path="/About" element={<About />} />
             <Route path='/Contact' element={<ContactUs />} />
             <Route path='/Details' element={<Details />} />
