@@ -13,7 +13,9 @@ export default function AuthContextProvider({ children }) {
       console.log("isLoggedIn", isLoggedIn);
       setAuth(isLoggedIn);
     }
-    
+    useEffect(()=>{
+      refresh()
+    },[])
   return (
     <>
       {" "}
