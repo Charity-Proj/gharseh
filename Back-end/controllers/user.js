@@ -27,8 +27,19 @@ const updateUser = async (req, res) => {
     res.json(result);
 }
 
+// Retrieve specific user data
+const getOneUser = async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      res.json(user);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to retrieve user data',err });
+    }
+  };
+
 module.exports = {
     getUser,
-    updateUser
+    updateUser,
+    getOneUser
 }
 
