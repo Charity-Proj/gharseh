@@ -1,118 +1,199 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Popup from "../components/Details/Popup";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../Context/AuthContext";
 
 function Details() {
   const [toggle, setToggle] = useState(false);
+  const [eventDataDetails, setEventDataDetails] = useState([])
+  const [isloading, setisloading] = useState()
+  const { id } = useParams()
+  let { auth, setAuth, refresh } = useContext(AuthContext);
+
   const handlePopup = () => {
     setToggle(!toggle);
   };
-
+  useEffect(() => {
+    axios.get(`http://localhost:5501/api/getOneEvent/${id}`)
+      .then((res) => {
+        setEventDataDetails(res.data)
+        setisloading(res.data)
+        console.log(res.data);
+      }).catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [])
   return (
     <>
-      <section>
-        <div className="relative mx-auto max-w-screen-xl px-4 py-8">
-          <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
-              <img
-                alt="Les Paul"
-                src="https://assabeel.net/Uploads/Models/Media/Images/2018/3/1/-1229544948.jpg"
-                className="aspect-square w-full rounded-xl object-cover"
-              />
-
-              <div className="grid grid-cols-2 gap-4 lg:mt-4">
+      {isloading != null &&
+        <section>
+          <div className="relative mx-auto max-w-screen-xl px-4 py-8">
+            <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
                 <img
                   alt="Les Paul"
-                  src="https://assabeel.net/Uploads/Models/Media/Images/2018/2/6/383461422.jpg"
-                  className="aspect-square w-full rounded-xl object-cover"
-                />
-
-                <img
-                  alt="Les Paul"
-                  src="https://www.dampress.net/photo//zeraa/green-houses.jpg"
-                  className="aspect-square w-full rounded-xl object-cover"
-                />
-
-                <img
-                  alt="Les Paul"
-                  src="https://scontent.famm12-1.fna.fbcdn.net/v/t1.6435-9/176578539_3761680667263048_3170040103351585609_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeFbgCts6yGZuy8Rze9OhAlnaV3zhtwdL5hpXfOG3B0vmEtnghckuSqYchiUWwP-QAcyU8joZTsB0WG_JSf2q_bg&_nc_ohc=B0MmqCZhSvMAX_Oyhgq&_nc_ht=scontent.famm12-1.fna&oh=00_AfColbuSLTavl_AXc2JdblPDLroabz7GqbvGBuzCLYqsCQ&oe=64B2F17A"
-                  className="aspect-square w-full rounded-xl object-cover"
-                />
-
-                <img
-                  alt="Les Paul"
-                  src="https://cdn.wikifarmer.com/wp-content/uploads/2022/05/%D8%B2%D8%B1%D8%A7%D8%B9%D8%A9-%D8%A7%D9%84%D8%B7%D9%85%D8%A7%D8%B7%D9%85-%D9%81%D9%8A-%D8%A7%D9%84%D8%AD%D9%82%D9%88%D9%84-%D8%A7%D9%84%D9%85%D9%83%D8%B4%D9%88%D9%81%D8%A9-%D9%84%D8%AA%D8%AD%D9%82%D9%8A%D9%82-%D8%A7%D9%84%D8%B1%D8%A8%D8%AD-%E2%80%93-%D8%AF%D9%84%D9%8A%D9%84-%D9%83%D8%A7%D9%85%D9%84-%D8%B9%D9%86-%D8%B2%D8%B1%D8%A7%D8%B9%D8%A9-%D8%A7%D9%84%D8%B7%D9%85%D8%A7%D8%B7%D9%85-%D9%81%D9%8A-%D8%A7%D9%84%D8%AD%D9%82%D9%88%D9%84-%D8%A7%D9%84%D9%85%D9%83%D8%B4%D9%88%D9%81%D8%A9.jpg"
+                  src={eventDataDetails.image}
                   className="aspect-square w-full rounded-xl object-cover"
                 />
               </div>
-            </div>
-
-            <div className="sticky top-8">
-              <div className="mt-8 flex justify-between" dir="rtl">
-                <div className="max-w-[35ch] space-y-2">
-                  <h1 className="text-xl font-bold sm:text-2xl text-right">
-                    زراعة الأشجار لترسيخ البيئة الخضراء{" "}
-                  </h1>
+              <div className="sticky top-8">
+                <div className="mt-8 flex justify-between" dir="rtl">
+                  <div className="max-w-[35ch] space-y-2">
+                    <h1 className="text-xl font-bold sm:text-2xl text-right">
+                      {eventDataDetails.name}
+                    </h1>
+                  </div>
                 </div>
-              </div>
-              <br />
-              <br />
-              <br />
-              <br />
-              <div className="mt-4">
-                <div className="prose max-w-none">
-                  <p className=" text-right">
-                    نحن ندعوكم للانضمام إلينا في حدث زراعة الأشجار لترسيخ البيئة
-                    الخضراء. إن هذا الحدث هو جهودنا المشتركة لتحقيق التوازن
-                    البيئي والحفاظ على جمال الطبيعة في مجتمعنا. ستقام هذه
-                    الفعالية في [اسم الموقع] يوم [تاريخ الحدث] حيث سيجتمع
-                    المشاركون من مختلف الأعمار والخلفيات للمساهمة في زراعة
-                    الأشجار وبناء مستقبل أفضل للأجيال القادمة. خلال هذا الحدث،
-                    ستحصل على فرصة للتواصل مع الطبيعة والمساهمة في تحسين بيئتنا.
-                    سيتم توفير جميع الأدوات والمواد اللازمة لزراعة الأشجار
-                    وسيقوم خبراء بتقديم التوجيه والإرشاد خلال عملية الزراعة.
-                    سواء كنت تمتلك خبرة في زراعة الأشجار أم لا، فإن هذا الحدث
-                    يقدم فرصة مثالية للتعلم والمشاركة في نشاط بناء البيئة.
-                    ستتعرف على أنواع مختلفة من الأشجار المحلية وأهميتها في تنظيم
-                    المناخ وتوفير الظل وتحسين جودة الهواء. إن زراعة الأشجار لها
-                    العديد من الفوائد، بما في ذلك تحسين البيئة العامة، وتعزيز
-                    التنوع البيولوجي، ومكافحة التصحر، وتوفير الظل والجمال
-                    الطبيعي للمناطق المحيطة. ستكون مساهمتكم في هذا الحدث بمثابة
-                    إرث بيئي للأجيال القادمة. انضموا إلينا في حدث زراعة الأشجار
-                    وكونوا جزءًا من الحركة البيئية لبناء مج
-                  </p>
+                <div className="mt-4">
+                  <div className="prose max-w-none">
+                    <p className=" text-right">
+                      {eventDataDetails.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
+                <div className="mt-4">
+                  <div className="prose max-w-none">
+                    <p className=" text-right">
+                      تاريخ الفعالية : {new Date(eventDataDetails.startDate)?.toISOString().split("T")[0]}
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div className="prose max-w-none">
+                    <p className=" text-right">
+                      مدة الفعالية : {eventDataDetails.eventLength} ساعات
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div className="prose max-w-none">
+                    <p className=" text-right">
+                      عدد المتطوعين المطلوبين : {eventDataDetails.maxVolunteers} شخص
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div className="prose max-w-none">
+                    <p className=" text-right">
+                      عدد المتطوعين الى ألان : {eventDataDetails.volunteers.length} شخص
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div className="prose max-w-none">
+                    <p className=" text-right">
+                      عدد الاشجار المراد زرعها : {eventDataDetails.numberOfTrees} شجرة
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div className="prose max-w-none">
+                    <p className=" text-right">
+                      سعر الشجرة الواحدة : {eventDataDetails.treePrice} دينار
+                    </p>
+                  </div>
+                </div>
 
-              <form className="mt-8">
-                <div className="mt-8 flex  justify-end gap-4">
-                  <Link to="/Payment">
-                    <button
-                      type="submit"
+                <form className="mt-8">
+                  <div className="mt-8 flex  justify-end gap-4">
+                    <Link to={`/Payment/${eventDataDetails._id}`}>
+                      <button
+                        type="submit"
+                        className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
+                      >
+                        تبرع الان
+                      </button>
+                    </Link>
+                    {/* Modal toggle */}
+                    <Link
                       className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
-                    >
-                      تبرع الان
-                    </button>
-                  </Link>
-                  {/* Modal toggle */}
-                  <button
-                    className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
-                    type="button"
-                    onClick={() => handlePopup()}
+                      type="button"
+                      onClick={auth ? handlePopup : undefined}
+                      to={auth ? undefined : '/Login'}
                     data-modal-toggle="authentication-modal"
-                  >
+                    >
                     تطوع الآن
-                  </button>
-                </div>
-              </form>
-            </div>
+                  </Link>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
+          </div >
+        </section >
+      }
 
-      <Popup toggle={toggle} setToggle={setToggle} />
+<Popup toggle={toggle} setToggle={setToggle} />
     </>
+
   );
 }
 
 export default Details;
+
+
+
+
+
+// <>
+//         <div className="py-16 bg-white">
+//           <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
+//             <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
+//               <div className="md:5/12 lg:w-5/12">
+//                 <img
+//                   src="https://img.freepik.com/premium-photo/children-s-hands-carefully-holding-young-plant_165146-797.jpg"
+//                   alt="image"
+//                   loading="lazy"
+//                   width=""
+//                   height=""
+//                 />
+//               </div>
+//               <div className="md:7/12 lg:w-6/12">
+
+//                 <div className="text-3xl font-black text-gray-800 uppercase dark:text-white text-green-700">
+//                   زراعة الأشجار لترسيخ البيئة الخضراء
+//                 </div>
+//                 <div className="text-3xl font-black text-gray-800 uppercase dark:text-white text-green-700">
+//                   12.1044$  الاردن - عمان
+//                 </div>
+//                 <h1 className="flex flex-col text-6xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
+//                   <span className="text-5xl sm:text-7xl "> خدمتنا
+//                   </span> </h1>
+//                 <p className="mt-6 text-gray-600">
+//                   زراعة الأشجار هي واحدة من أهم الإجراءات لترسيخ البيئة الخضراء
+//                   والحفاظ على التوازن البيئي. تلعب الأشجار دورًا حيويًا في تحسين
+//                   جودة الهواء وتنظيم مناخ الأرض وحماية التنوع البيولوجي
+//                   و تحسين جودة الهواء: تعمل الأشجار على امتصاص ثاني أكسيد الكربون وإطلاق
+//                   الأكسجين في عملية التمثيل الضوئي. كما تساهم في امتصاص ملوثات
+//                   الهواء الأخرى مثل ثاني أكسيد النيتروجين وغازات الكبريت.
+//                 </p>
+//               </div>
+//             </div>
+
+//             <form className="mt-8">
+//               <div className="mt-8 flex  justify-end gap-4">
+//                 <Link to="/Payment">
+//                   <button
+//                     type="submit"
+//                     className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
+//                   >
+//                     تبرع الان
+//                   </button>
+//                 </Link>
+//                 {/* Modal toggle */}
+//                 <button
+//                   className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
+//                   type="button"
+//                   onClick={() => handlePopup()}
+//                   data-modal-toggle="authentication-modal"
+//                 >
+//                   تطوع الآن
+//                 </button>
+//               </div>
+//             </form>
+
+//           </div>
+//         </div>
+//         <Popup toggle={toggle} setToggle={setToggle} />
+
+//       </>

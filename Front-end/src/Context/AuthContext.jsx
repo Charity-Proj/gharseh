@@ -9,12 +9,13 @@ export default function AuthContextProvider({ children }) {
   const refresh = () => {
     if (localStorage.getItem("token"))
       isLoggedIn = localStorage.getItem("token") ? true : false;
-    console.log("isLoggedIn", isLoggedIn);
-    setAuth(isLoggedIn);
-  };
-  useEffect(() => {
-    refresh();
-  }, []);
+    
+      console.log("isLoggedIn", isLoggedIn);
+      setAuth(isLoggedIn);
+    }
+    useEffect(()=>{
+      refresh()
+    },[])
   return (
     <>
       {" "}

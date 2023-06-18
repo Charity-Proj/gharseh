@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import {  useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Layout from './layout/layout';
@@ -39,7 +39,7 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/Passwordrest/:resetToken" element={<ResetPassword />} />
-            <Route path="/Payment" element={<Payment />} />
+            <Route path="/Payment/:id" element={<Payment />} />
             <Route path='/userprofile/:id' element={<Userprofile />} />
             <Route path="/About" element={<About />} />
             <Route path='/Contact' element={<ContactUs />} />

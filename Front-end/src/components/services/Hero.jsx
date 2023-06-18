@@ -1,6 +1,6 @@
 import React from "react";
 
-const Hero = () => {
+const Hero = ({ search, setSearch }) => {
   return (
     <div
       style={{
@@ -20,10 +20,12 @@ const Hero = () => {
             defaultValue=""
             placeholder="ابحث"
             className="mt-2 shadow-md border-2 border-green-500 focus:shadow focus:outline-none focus:border-green-500 rounded-2xl py-3 px-6 block w-full"
+            value={search}
+            onChange={(e) => { setSearch(e.target.value) }}
           />
           <div className="text-left absolute top-10 rounded-t-none rounded-b-2xl shadow bg-white divide-y w-full max-h-40 overflow-auto"></div>
         </div>
-        
+
       </div>
     </div>
   );
