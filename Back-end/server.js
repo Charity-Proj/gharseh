@@ -16,6 +16,8 @@ app.use('/api',require('./routers/auth'));
 app.use('/api',require('./routers/Payment'));
 app.use('/api',require('./routers/volunteer'));
 app.use(require('./routers/user'));
+app.use('/api',require('./routers/events'));
+
 
 
 app.use(errorHandler)

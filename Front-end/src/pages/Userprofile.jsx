@@ -1,57 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { AiFillHome } from 'react-icons/ai';
-import { FaUser, FaReceipt, FaHandHoldingHeart } from 'react-icons/fa';
-import { FiLogOut } from 'react-icons/fi';
-import Orderhistory from '../components/userprofile/orderhistory';
-import { Profilehome } from '../components/userprofile/profilehome';
-import { VolunteerHistory } from '../components/userprofile/volunteerHistory';
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { AiFillHome } from "react-icons/ai";
+import { FaUser, FaReceipt, FaHandHoldingHeart } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+import Orderhistory from "../components/userprofile/orderhistory";
+import { Profilehome } from "../components/userprofile/profilehome";
+import { VolunteerHistory } from "../components/userprofile/volunteerHistory";
+import { UserContext } from "../Context/UserContext";
+import { AuthContext } from "../Context/AuthContext";
 // import { findEventsByDonatorEmail } from '../../../Back-end/controllers/events';
 
 const Userprofile = () => {
+  const ctx = useContext(UserContext);
+  const { setAuth } = useContext(AuthContext);
+
+  // console.log(ctx.user);
   const { id } = useParams();
 
   const navigate = useNavigate();
-  const [activeLink, setActiveLink] = useState('home');
+  const [activeLink, setActiveLink] = useState("home");
   const [userData, setUserData] = useState();
-//   const [userEmail, setUserEmail] = useState();
+  //   const [userEmail, setUserEmail] = useState();
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5501/getOneUser/${id}`
-      ); // Replace "123" with the actual user ID
-      setUserData(response.data);
-      console.log( userData);
-    //   setUserEmail(response.data.email);
-    //   console.log('responce is  ', userEmail);
-    } catch (err) {
-      console.error('Failed to retrieve user data:', err);
-    }
-  };
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+  // const fetchUserData = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:5501/getOneUser/${id}`
+  //     ); // Replace "123" with the actual user ID
+  //     setUserData(response.data);
+  //     console.log( userData);
+  //   //   setUserEmail(response.data.email);
+  //   //   console.log('response is  ', userEmail);
+  //   } catch (err) {
+  //     console.error('Failed to retrieve user data:', err);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchUserData();
+  // },  []);
 
- 
+  //   const donatorEmail = userEmail;
+  //   findEventsByDonatorEmail(donatorEmail)
+  //     .then((events) => {
+  //       console.log('Events matching the donator email:');
+  //       console.log(events);
+  //     })
+  //     .catch((err) => {
+  //       console.error('Error:', err);
+  //     });
 
-//   const donatorEmail = userEmail;
-//   findEventsByDonatorEmail(donatorEmail)
-//     .then((events) => {
-//       console.log('Events matching the donator email:');
-//       console.log(events);
-//     })
-//     .catch((err) => {
-//       console.error('Error:', err);
-//     });
-    
   const renderContent = () => {
-    if (activeLink === 'home') {
-      return <Profilehome data={userData}/>;
-    } else if (activeLink === 'volunteering') {
+    if (activeLink === "home") {
+      return <Profilehome />;
+    } else if (activeLink === "volunteering") {
       return <VolunteerHistory />;
-    } else if (activeLink === 'Donations') {
+    } else if (activeLink === "Donations") {
       return <Orderhistory />;
     }
   };
@@ -62,7 +66,8 @@ const Userprofile = () => {
 
   function handleLogout() {
     localStorage.clear();
-    navigate('/');
+    setAuth(false);
+    navigate("/");
   }
 
   return (
@@ -92,7 +97,7 @@ const Userprofile = () => {
       <aside
         id="logo-sidebar"
         className="fixed top-0 right-0 z-40 w-64 h-screen transition-transform translate-x-full sm:translate-x-0"
-        style={{ backgroundColor: '#161616', color: 'white' }}
+        style={{ backgroundColor: "#161616", color: "white" }}
         aria-label="Sidebar"
       >
         <div className="h-full px-2 py-2 overflow-y-auto">
@@ -108,11 +113,11 @@ const Userprofile = () => {
             <Link
               to="/"
               className="flex items-center p-2 rounded-lg hover:bg-black -100 dark:hover:bg-black-700"
-              onClick={() => handleLinkClick('home')}
+              onClick={() => handleLinkClick("home")}
             >
               <AiFillHome
                 className="w-5 h-5 me-4"
-                style={{ color: '#54B435' }}
+                style={{ color: "#54B435" }}
               />
               <span className="ml-3">الصفحة الرئيسية</span>
             </Link>
@@ -121,9 +126,9 @@ const Userprofile = () => {
               <a
                 href="#"
                 className="flex items-center p-2 rounded-lg hover:bg-black -100 dark:hover:bg-black-700"
-                onClick={() => handleLinkClick('home')}
+                onClick={() => handleLinkClick("home")}
               >
-                <FaUser className="w-5 h-5 me-4" style={{ color: '#54B435' }} />
+                <FaUser className="w-5 h-5 me-4" style={{ color: "#54B435" }} />
                 <span className="ml-3">الملف الشخصي</span>
               </a>
             </li>
@@ -131,11 +136,11 @@ const Userprofile = () => {
               <a
                 href="#"
                 className="flex items-center p-2 rounded-lg hover:bg-black -100 dark:hover:bg-black-700"
-                onClick={() => handleLinkClick('Donations')}
+                onClick={() => handleLinkClick("Donations")}
               >
                 <FaReceipt
                   className="w-6 h-6 me-4"
-                  style={{ color: '#54B435' }}
+                  style={{ color: "#54B435" }}
                 />
                 <span className="flex-1 ml-3 whitespace-nowrap">
                   سجل التبرعات
@@ -148,11 +153,11 @@ const Userprofile = () => {
                 <Link
                   to=""
                   className="flex items-center p-2 rounded-lg hover:bg-black -100 dark:hover:bg-black-700"
-                  onClick={() => handleLinkClick('volunteering')}
+                  onClick={() => handleLinkClick("volunteering")}
                 >
                   <FaHandHoldingHeart
                     className="w-7 h-7 me-4"
-                    style={{ color: '#54B435' }}
+                    style={{ color: "#54B435" }}
                   />
                   <span className="ml-3">سجل التطوع</span>
                 </Link>
@@ -164,7 +169,7 @@ const Userprofile = () => {
               >
                 <FiLogOut
                   className="w-7 h-7 me-4"
-                  style={{ color: '#54B435' }}
+                  style={{ color: "#54B435" }}
                 />
                 <span className="flex-1 ml-3 whitespace-nowrap">
                   تسجيل خروج

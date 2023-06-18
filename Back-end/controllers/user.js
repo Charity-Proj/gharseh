@@ -10,22 +10,44 @@ const getUser = async (req, res) => {
     res.json(user);
 }
 
-const updateUser = async (req, res) => {
-    if (!req?.body?.id) {
-        return res.status(400).json({ 'message': 'ID parameter is required.' });
+const updateUser= async (req, res) => {
+    try {
+      const {userId, userName, phoneNumber} = req.body
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        console.log('User not found');
+        return;
+      }
+  
+
+      user.username = userName || user.username;
+      user.phoneNumber = phoneNumber || user.phoneNumber
+
+  
+      const updatedUser = await user.save();
+      res.json(updatedUser);
+    } catch (error) {
+      console.error('Error editing user:', error);
     }
+  }
 
-    const user = await User.findOne({ _id: req.body.id }).exec();
+// const updateUser = async (req, res) => {
+//     if (!req?.body?.id) {
+//         return res.status(400).json({ 'message': 'ID parameter is required.' });
+//     }
 
-    if (!user) {
-        return res.status(204).json({ "message": `No User matches ID ${req.body.id}.` });
-    }
+//     const user = await User.findOne({ _id: req.body.id }).exec();
 
-    if (req.body?.username) user.username = req.body.username;
-    if (req.body?.phonenumber) user.phonenumber = req.body.phonenumber;
-    const result = await user.save();
-    res.json(result);
-}
+//     if (!user) {
+//         return res.status(204).json({ "message": `No User matches ID ${req.body.id}.` });
+//     }
+
+//     if (req.body?.userName) user.username = req.body.userName;
+//     if (req.body?.phoneNumber) user.phonenumber = req.body.phoneNumber;
+//     const result = await user.save();
+//     res.json(result);
+// }
 
 // Retrieve specific user data
 const getOneUser = async (req, res) => {
