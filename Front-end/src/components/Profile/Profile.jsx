@@ -1,80 +1,74 @@
-import React, { useContext } from 'react'
-import { UserContext } from '../../Context/UserContext'
-import { AuthContext } from '../../Context/AuthContext'
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { UserContext } from "../../Context/UserContext";
+import { AuthContext } from "../../Context/AuthContext";
+import { Link } from "react-router-dom";
 import {
-    Menu,
-    MenuHandler,
-    MenuList,
-    MenuItem,
-    Avatar,
-    Typography, 
-    Button
-  } from "@material-tailwind/react";
-  import {
-    PowerIcon,
-    UserCircleIcon,
-  } from "@heroicons/react/24/outline";
-
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Avatar,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
+import { PowerIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 
 const Profile = () => {
+  const { setAuth } = useContext(AuthContext);
+  const { user } = useContext(UserContext);
 
-    const { setAuth } = useContext(AuthContext);
-    const { user } = useContext(UserContext);
-   
-
-    const handleLogout = () => {
-        setAuth(false);
-        localStorage.clear();
-    }
+  const handleLogout = () => {
+    setAuth(false);
+    localStorage.clear();
+  };
 
   return (
     <>
-    
-   
       {/* Dropdown menu */}
-      { 
-          <Menu>
+      {
+        <Menu>
           <MenuHandler>
             <Avatar
               variant="circular"
               alt="candice wu"
               className="cursor-pointer w-10 h-10"
               src="https://icon-library.com/images/my-profile-icon-png/my-profile-icon-png-24.jpg"
-              
-           />
+            />
           </MenuHandler>
-          <MenuList dir='rtl'>
+          <MenuList dir="rtl">
             <MenuItem className="flex items-center gap-2">
-              <UserCircleIcon strokeWidth={2} color='green' className="h-5 w-5" />
-              <Link to={`/userprofile/${user._id}`}> 
-              <Typography variant="small" className="text-black font-bold">
-                صفحتي
-              </Typography>
+              <UserCircleIcon
+                strokeWidth={2}
+                color="green"
+                className="h-5 w-5"
+              />
+              <Link to={`/userprofile/${user._id}`}>
+                <Typography variant="small" className="text-black font-bold">
+                  صفحتي
+                </Typography>
               </Link>
             </MenuItem>
             <hr className="my-2 border-blue-gray-50" />
             <MenuItem className="flex items-center gap-2 ">
-              <PowerIcon strokeWidth={2} color='red' className="h-4 w-4" />
+              <PowerIcon strokeWidth={2} color="red" className="h-4 w-4" />
               <Typography variant="small" className="font-bold">
-              <Link
-            variant="gradient"
-            color="green"
-            size="sm"
-            fullWidth
-            className="text-black mb-2"
-            onClick={handleLogout}
-          >
-            <span>تسجيل خروج</span>
-          </Link>
+                <Link
+                  variant="gradient"
+                  color="green"
+                  size="sm"
+                  fullWidth
+                  className="text-black mb-2"
+                  onClick={handleLogout}
+                >
+                  <span>تسجيل خروج</span>
+                </Link>
               </Typography>
             </MenuItem>
           </MenuList>
         </Menu>
       }
-   
-  </>
-  )
-}
+    </>
+  );
+};
 
-export default Profile
+export default Profile;
