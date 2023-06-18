@@ -3,7 +3,7 @@ const router = express.Router()
 const {getEvents, getOneEvent} = require('../controllers/events');
 
 /// ALL About Users
-router.route('/getEvents/').post(getEvents);
+router.get('/getEvents',getEvents);
 router.get('/getOneEvent/:id',  getOneEvent);
 
 
