@@ -3,16 +3,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Context/UserContext";
 
 export default function Orderhistory() {
-  const userData = useContext(UserContext);
-  const email = userData.user.email;
+  const {user} = useContext(UserContext);
+  const email = user.email;
 
   const [donerEvents, setDonerEvents] = useState([]);
 
   const getDonerEvents = async () => {
     try {
-      const data = await axios.get("http://localhost:5501/api/getDonerEvents", {
-        email,
-      });
+      const data = await axios.get("http://localhost:5501/api/getDonerEvent",{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }});
       setDonerEvents(data.data);
     } catch (error) {
       console.error(error);

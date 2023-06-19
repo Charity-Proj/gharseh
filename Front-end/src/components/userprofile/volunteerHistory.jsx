@@ -3,27 +3,25 @@ import { UserContext } from "../../Context/UserContext";
 import axios from "axios";
 
 export const VolunteerHistory = () => {
-  const userData = useContext(UserContext);
-  const email = userData.user.email;
+  const { user } = useContext(UserContext);
+  const email = user.email;
 
   const [volunteerEvens, setVolunteerEvens] = useState([]);
-  const getVolunteerEvents = async () => {
-    try {
-      const data = await axios.get(
-        "http://localhost:5501/api/getVolunteerEvents",
-        {
-          email,
-        }
-      );
-      setVolunteerEvens(data.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    getVolunteerEvents();
+
+  useEffect(()=>{
     console.log(email);
-  }, []);
+    try {
+      axios.get('http://localhost:5501/api/getVolunteerEvents',{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }}).then((res)=>{
+        setVolunteerEvens(res.data);
+        console.log(res.data);
+      })
+    } catch (error) {
+      
+    }
+  },[])
 
   return (
     <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">

@@ -1,16 +1,20 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../../Context/UserContext';
+import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Popup = ({ toggle, setToggle }) => {
-
-  console.log(toggle)
+  const { user, setUser, userRefresh } = useContext(UserContext)
+  const { id } = useParams()
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoadin] = useState(true)
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
+    fullName: user.username,
+    email: user.email,
     age: '',
     gender: '',
   });
-  const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
     setFormData({
@@ -43,29 +47,39 @@ const Popup = ({ toggle, setToggle }) => {
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
       try {
-
+          setIsLoadin(false)
         const token = localStorage.getItem('token');
         const config = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         };
-
-
-        const response = await axios.post(
-          'http://localhost:5501/api/Volunteer',
+        axios.post(
+          `http://localhost:5501/api/Volunteer/${id}`,
           formData,
           config
-        );
-        console.log(response.data);
-        alert(response.data)
-        setErrors({});
-        setFormData({
-          fullName: '',
-          email: '',
-          age: '',
-          gender: '',
+        ).then((response) => {
+          if(response.data.success){
+            Swal.fire({
+              icon: 'success',
+              title:'تم التطوع بنجاح في هذه الفعالية',
+              confirmButtonColor:'green'
+            })
+            setIsLoadin(true)
+            setToggle(false)
+            setErrors("");
+          }else if(response.data.duplicated){
+          Swal.fire({
+            icon: 'warning',
+            title:response.data.duplicated,
+            confirmButtonColor:'green'
+          }) 
+          setIsLoadin(true);
+          setToggle(false)
+          setErrors("");
+        }
         });
+
       } catch (error) {
         console.log('Error:', error.message);
       }
@@ -83,7 +97,7 @@ const Popup = ({ toggle, setToggle }) => {
       <>
         {toggle &&
 
-          <div className="w-full flex items-center justify-center " dir='ltr'> 
+          <div className="w-full flex items-center justify-center " dir='ltr'>
             <div
               className="overflow-x-hidden overflow-y-auto bg-gray-400/70 fixed h-modal md:h-full md:inset-0 z-50 justify-center items-center"
             >
@@ -135,6 +149,7 @@ const Popup = ({ toggle, setToggle }) => {
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         placeholder="ادخل اسمك الكامل"
                         required=""
+                        disabled
                       />
                     </div>
                     <div className='w-full flex items-start  mr-2 justify-start'>{errors.fullName && <span className='text-red-600'>{errors.fullName}</span>}</div>
@@ -153,6 +168,7 @@ const Popup = ({ toggle, setToggle }) => {
                         placeholder="البريد الإلكتروني"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         required=""
+                        disabled
                       />
                     </div>
                     <div className='w-full flex items-start  mr-2 justify-start'>{errors.email && <span className='text-red-600'>{errors.email}</span>}</div>
@@ -196,19 +212,25 @@ const Popup = ({ toggle, setToggle }) => {
                         <option value="male">أنثى</option>
                       </select>
                     </div>
-
-                    <button
-                      type="submit"
-                      className="w-full text-white bg-green-500 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                    >
-                      تطوع معنا
-                    </button>
+                    {isLoading ?
+                      <button
+                        type="submit"
+                        className="w-full text-white bg-green-500 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                      >
+                        تطوع معنا
+                      </button>
+                      : <button
+                        type="submit"
+                        className="w-full text-white bg-green-500 hover:bg-green-500 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                      >
+                        انتظر...
+                      </button>}
                   </form>
                 </div>
               </div>
             </div>
           </div>
-          }
+        }
       </>
 
 

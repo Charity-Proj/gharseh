@@ -1,27 +1,32 @@
-const Payment = require('../models/Payment');
-const User = require('../models/User');
+const {Event} = require("../models/eventSchema");
+const Payment = require("../models/Payment");
+const User = require("../models/User");
 
 exports.Payment = async (req, res, next) => {
-  const { id, cardNumber,cardHolder, cvc, expiryDate } = req.body;
-
+  const {email, cardNumber, cardHolder, cvc, expiryDate ,amount} = req.body;
+  console.log(email);
+  const id = req.params.id;
   try {
-    const user = await User.findOne({ id });
-
-    if (!user) {
-      return next(new ErrorResponse("Invalid credentials", 401));
+    if(email){
+      const event = await Event.findById(id);
+      const updatedDonators = [...event.donators, { email, amount }];
+      const updateDonatios = event.donations + Number(amount)
+      await Event.findByIdAndUpdate(id, { donators: updatedDonators , donations:updateDonatios });
+    }else{
+      const event = await Event.findById(id);
+      const updatedDonators = [...event.donators, { email:"anonmous", amount }];
+      const updateDonatios = event.donations + Number(amount)
+      await Event.findByIdAndUpdate(id, { donators: updatedDonators , donations:updateDonatios });
     }
-
     const payment = await Payment.create({
       cardNumber,
       cardHolder,
       cvc,
       expiryDate,
-      id,
     });
 
-    res.json(payment);
+    res.json("payment done");
   } catch (error) {
     next(error);
   }
 };
-

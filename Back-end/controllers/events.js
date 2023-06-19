@@ -25,10 +25,9 @@ const getOneEvent = async (req, res) => {
 const getEventsByVolunteer = async (req, res) => {
 
   try {
-      const email = req.body.email
+      const email = req.user.email
       const events = await Event.find({ "volunteers.email": email });
       res.json(events) ;
-
     } catch (error) {
       // Handle error
       console.error("Error retrieving volunteered events:", error);
@@ -39,7 +38,7 @@ const getEventsByVolunteer = async (req, res) => {
 const getEventsByDoner = async (req, res) => {
 
   try {
-      const email = req.body.email
+    const email = req.user.email
       const events = await Event.find({ "donators.email": email });
       res.json(events) ;
 
