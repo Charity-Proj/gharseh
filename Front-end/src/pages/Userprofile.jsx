@@ -11,7 +11,7 @@ import { UserContext } from "../Context/UserContext";
 import { AuthContext } from "../Context/AuthContext";
 // import { findEventsByDonatorEmail } from '../../../Back-end/controllers/events';
 
-const Userprofile = () => {
+const Userprofile = ({ hideNav, setHideNav }) => {
   const ctx = useContext(UserContext);
   const { setAuth } = useContext(AuthContext);
 
@@ -21,35 +21,7 @@ const Userprofile = () => {
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState("home");
   const [userData, setUserData] = useState();
-  //   const [userEmail, setUserEmail] = useState();
-
-  // const fetchUserData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `http://localhost:5501/getOneUser/${id}`
-  //     ); // Replace "123" with the actual user ID
-  //     setUserData(response.data);
-  //     console.log( userData);
-  //   //   setUserEmail(response.data.email);
-  //   //   console.log('response is  ', userEmail);
-  //   } catch (err) {
-  //     console.error('Failed to retrieve user data:', err);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchUserData();
-  // },  []);
-
-  //   const donatorEmail = userEmail;
-  //   findEventsByDonatorEmail(donatorEmail)
-  //     .then((events) => {
-  //       console.log('Events matching the donator email:');
-  //       console.log(events);
-  //     })
-  //     .catch((err) => {
-  //       console.error('Error:', err);
-  //     });
-
+  setHideNav(true);
   const renderContent = () => {
     if (activeLink === "home") {
       return <Profilehome />;
@@ -67,6 +39,7 @@ const Userprofile = () => {
   function handleLogout() {
     localStorage.clear();
     setAuth(false);
+    setHideNav(false);
     navigate("/");
   }
 
@@ -101,27 +74,26 @@ const Userprofile = () => {
         aria-label="Sidebar"
       >
         <div className="h-full px-2 py-2 overflow-y-auto">
-          <Link
-            to="/"
+          <a
+            href="/"
+            onClick={() => setHideNav(false)}
             className="self-center text-2xl font-semibold whitespace-nowrap"
           >
             ☘️ غرسة
-          </Link>
+          </a>
           <br />
           <br />
           <ul className="space-y-2 font-medium">
-            <Link
-              to="/"
-              className="flex items-center p-2 rounded-lg hover:bg-black -100 dark:hover:bg-black-700"
-              onClick={() => handleLinkClick("home")}
-            >
-              <AiFillHome
-                className="w-5 h-5 me-4"
-                style={{ color: "#54B435" }}
-              />
-              <span className="ml-3">الصفحة الرئيسية</span>
-            </Link>
-
+            <li>
+              <a
+                href="/"
+                onClick={() => setHideNav(false)}
+                className="flex items-center p-2 rounded-lg hover:bg-black -100 dark:hover:bg-black-700"
+              >
+                <FaUser className="w-5 h-5 me-4" style={{ color: "#54B435" }} />
+                <span className="ml-3">الصفحة الرئيسية</span>
+              </a>
+            </li>
             <li>
               <a
                 href="#"

@@ -4,7 +4,10 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../../Context/UserContext";
 import Swal from 'sweetalert2';
+import { Spinner } from "@material-tailwind/react";
 export default function payment() {
+
+  const [isLoading, setIsLoading] = useState(false)
   const { user, setUser, userRefresh } = useContext(UserContext)
   const { id } = useParams()
   const Navigate = useNavigate()
@@ -63,6 +66,7 @@ export default function payment() {
     e.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
+      setIsLoading(true);
       try {
         const userData = {
           email:formData.email,
@@ -82,7 +86,7 @@ export default function payment() {
             icon: 'success',
             confirmButtonColor:'green'
           })
-          // Navigate('/')
+          Navigate('/')
           setErrors("");
         });
       } catch (error) {
@@ -120,6 +124,7 @@ export default function payment() {
                   id="card-holder"
                   value={formData.cardHolder}
                   onChange={handleChange}
+                  onInput={() => setErrors({})}
                   name="cardHolder"
                   className="lg:w-full  border-b-2  text-right border-green-400 px-4 py-3 pr-11 text-sm shadow-sm outline-none focus:z-10 focus:border-b-blue-500 focus:ring-blue-500"
                   placeholder="ادخل اسمك الكامل "
@@ -157,6 +162,7 @@ export default function payment() {
                     type="text"
                     value={formData.expiryDate}
                     onChange={handleChange}
+                    onInput={() => setErrors({})}
                     name="expiryDate"
                     className="w-full mr-4 ml-4 flex-shrink-0  border-b-2  border-green-400 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-b-blue-500 focus:ring-blue-500"
                     placeholder="mm/yy"
@@ -175,6 +181,7 @@ export default function payment() {
                     type="text"
                     value={formData.cvc}
                     onChange={handleChange}
+                    onInput={() => setErrors({})}
                     name="cvc"
                     className="w-full mr-4 ml-4 flex-shrink-0  border-b-2  border-green-400 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-b-blue-500 focus:ring-blue-500"
                     placeholder="CVC"
@@ -207,6 +214,7 @@ export default function payment() {
                     type="text"
                     id="card-no"
                     name="cardNumber"
+                    onInput={() => setErrors({})}
                     className="w-full text-right  border-b-2  border-green-400 px-4 py-3 pr-11 text-sm shadow-sm outline-none focus:z-10 focus:border-b-blue-500 focus:ring-blue-500"
                     placeholder="xxxx-xxxx-xxxx-xxxx"
                   />
@@ -229,6 +237,7 @@ export default function payment() {
                   name="amount"
                   value={formData.amount}
                   onChange={handleChange}
+                  onInput={() => setErrors({})}
                 />
                 <label class="text-gray-600 dark:text-gray-400 me-6">
                   دينار{" "}
@@ -236,8 +245,11 @@ export default function payment() {
               </div>
             </div>
 
-            <button
+         { isLoading ?  
+         
+         <button
               type="submit"
+              disabled={true}
               className="mt-10 box-border relative z-30 inline-flex items-center justify-center w-full px-8 py-3 overflow-hidden font-bold text-white transition-all duration-300 bg-green-600 rounded-md cursor-pointer group ring-offset-2 ring-1 ring-green-300 ring-offset-indigo-200 hover:ring-offset-green-500 ease focus:outline-none"
             >
               <span className="absolute bottom-0 right-0 w-8 h-20 -mb-8 -mr-5 transition-all duration-300 ease-out transform rotate-45 translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
@@ -291,9 +303,68 @@ export default function payment() {
                     stroke-width="12"
                   />
                 </svg>
-                تبرع الان
+                <Spinner className="h-4 w-4" />
               </span>
-            </button>
+          </button>
+             :    
+             <button
+             type="submit"
+             className="mt-10 box-border relative z-30 inline-flex items-center justify-center w-full px-8 py-3 overflow-hidden font-bold text-white transition-all duration-300 bg-green-600 rounded-md cursor-pointer group ring-offset-2 ring-1 ring-green-300 ring-offset-indigo-200 hover:ring-offset-green-500 ease focus:outline-none"
+           >
+             <span className="absolute bottom-0 right-0 w-8 h-20 -mb-8 -mr-5 transition-all duration-300 ease-out transform rotate-45 translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
+             <span className="absolute top-0 left-0 w-20 h-8 -mt-1 -ml-12 transition-all duration-300 ease-out transform -rotate-45 -translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
+             <span className="relative z-20 flex items-center text-sm">
+               <svg
+                 xmlns="http://www.w3.org/2000/svg"
+                 className="relative  w-5 h-5 mr-2 text-white"
+                 viewBox="0 0 256 256"
+               >
+                 <rect width="256" height="256" fill="none" />
+                 <line
+                   x1="128"
+                   y1="232"
+                   x2="128"
+                   y2="88"
+                   fill="none"
+                   stroke="#fff"
+                   stroke-linecap="round"
+                   stroke-linejoin="round"
+                   stroke-width="12"
+                 />
+                 <line
+                   x1="128"
+                   y1="152"
+                   x2="80"
+                   y2="128"
+                   fill="none"
+                   stroke="#fff"
+                   stroke-linecap="round"
+                   stroke-linejoin="round"
+                   stroke-width="12"
+                 />
+                 <line
+                   x1="128"
+                   y1="128"
+                   x2="176"
+                   y2="104"
+                   fill="none"
+                   stroke="#fff"
+                   stroke-linecap="round"
+                   stroke-linejoin="round"
+                   stroke-width="12"
+                 />
+                 <path
+                   d="M132.5,181.2A64,64,0,1,0,194.7,69.9a8.6,8.6,0,0,1-4-4.2,68,68,0,0,0-125.4,0,8.6,8.6,0,0,1-4,4.2,64,64,0,1,0,62.2,111.3A8.2,8.2,0,0,1,132.5,181.2Z"
+                   fill="none"
+                   stroke="#fff"
+                   stroke-linecap="round"
+                   stroke-linejoin="round"
+                   stroke-width="12"
+                 />
+               </svg>
+               تبرع الان
+             </span>
+         </button>}
           </form>
         </div>
       </div>

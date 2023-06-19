@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import logo from '../assets/logo.png';
 
 
-export const Footer = () => {
+export const Footer = ({hideNav}) => {
     return (
-  
+  <>
+    { !hideNav &&  
       <footer className="bg-black text-center text-  lg:text-left" dir='rtl'>
         <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
           <div className="mr-12 hidden lg:block font-bold text-white">
@@ -108,8 +109,8 @@ export const Footer = () => {
           <span>  © 2023 حقوق النشر  : </span>
           <Link to="/" className="font-semibold text-white" >غرسة</Link>
         </div>
-      </footer>
-
+      </footer>}
+</>
     )
 }
 

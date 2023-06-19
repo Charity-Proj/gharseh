@@ -14,9 +14,11 @@ import ContactUs from './pages/Contact';
 import Details from './pages/Details';
 import Home from './pages/Home';
 import { AuthContext } from './Context/AuthContext';
+import { useState } from 'react';
 
 function App() {
   const { auth } = useContext(AuthContext)
+  const [hideNav, setHideNav] = useState(false)
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -33,7 +35,7 @@ function App() {
       <BrowserRouter>
       {auth? <>
       <ScrollToTop />
-        <Layout>
+        <Layout hideNav={hideNav} setHideNav={setHideNav}>
           <Routes>
             <Route index path="/" element={<Home />} />
             <Route path='/services' element={<Services />} />
@@ -42,7 +44,7 @@ function App() {
             <Route path="/ForgotPassword" element={<Home />} />
             <Route path="/Passwordrest/:resetToken" element={<Home />} />
             <Route path="/Payment/:id" element={<Payment />} />
-            <Route path='/userprofile/:id' element={<Userprofile />} />
+            <Route path='/userprofile/:id' element={<Userprofile hideNav={hideNav} setHideNav={setHideNav} />} />
             <Route path="/About" element={<About />} />
             <Route path='/Contact' element={<ContactUs />} />
             <Route path='/Details/:id' element={<Details />} />

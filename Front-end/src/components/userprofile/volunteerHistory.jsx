@@ -5,6 +5,7 @@ import axios from "axios";
 export const VolunteerHistory = () => {
   const { user } = useContext(UserContext);
   const email = user.email;
+  const [isLoading, setisloading] = useState(true)
 
   const [volunteerEvens, setVolunteerEvens] = useState([]);
 
@@ -16,6 +17,7 @@ export const VolunteerHistory = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }}).then((res)=>{
         setVolunteerEvens(res.data);
+        setisloading(false)
         console.log(res.data);
       })
     } catch (error) {
@@ -24,97 +26,76 @@ export const VolunteerHistory = () => {
   },[])
 
   return (
-    <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
+  <>
+
+  
+  
+          <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
       <div className="flex justify-start item-start space-y-2 flex-col ">
-        <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9  text-gray-800">
+        <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9   text-gray-900">
           سجل التطوع
         </h1>
-        <p className="text-base font-medium leading-6 text-gray-600">
-          21st Mart 2021 at 10:34 PM
-        </p>
+        <div class="w-20 h-2 bg-green-700 my-4"></div>
       </div>
-      <div className="mt-10 flex flex-col xl:flex-row justify-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
+
+      {isLoading && (
+              <div className="flex items-center h-[50vh] justify-center">
+
+              <svg className="animate-spin h-8 w-8 text-green-800" style={{marginLeft: "1rem"}} xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75 ms-5" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                  </path>
+              </svg>
+          
+              <span class="text-black text-3xl font-bold">{" "}انتظر...</span>
+          
+          </div> )}
+
+      {isLoading !== true && <div className="mt-10 flex flex-col xl:flex-row justify-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
         <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
-          <div className="flex flex-col justify-start items-start rounded bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
-            <p className="text-lg md:text-xl font-semibold leading-6 xl:leading-5 text-gray-800">
+          <div className="flex flex-col justify-start items-start  bg-green-50 rounded-lg px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
+            <p className="text-2xl md:text-2xl font-semibold leading-6 xl:leading-5 text-gray-900">
               {" "}
               الفعاليات
             </p>
-            {volunteerEvens.map((data) => (
+            { volunteerEvens?.map((data) => (
               <div
                 key={data._id}
                 className="mt-4 md:mt-6 flex  flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full "
               >
                 <div className="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-4 mb-4 space-y-4 md:space-y-0">
                   <div className="w-full flex flex-col justify-start items-start space-y-8">
-                    <h3 className="text-xl xl:text-2xl font-semibold leading-6 text-gray-800">
+                    <h3 className="text-xl xl:text-2xl font-semibold leading-6 text-green-800">
                       {data.name}
                     </h3>
-                    <div className="flex justify-start items-start flex-col space-y-2">
-                      {/* <p className="text-sm leading-none text-gray-800">
-                                            <span className="text-gray-300">Color: </span> Light Blue
-                                        </p> */}
-                    </div>
                   </div>
                   <div className="flex justify-between space-x-8 items-start w-full">
-                    {/* <p className="text-base xl:text-lg leading-6">
-                                    $36.00 <span className="text-red-300 line-through"> $45.00</span>
-                                </p> */}
                     <div className="gap-4">
-                      <span className="text-gray-300">تاريخ الفعالية: </span>
-                      <p className="text-sm leading-none text-gray-800">
-                        {data.startDate}
-                      </p>
+                      <span className="text-gray-500">تاريخ الفعالية: </span>
+                      <span className="text-sm leading-none text-gray-800">
+                        {data.startDate.toString().split("T")[0]}
+                      </span>
                     </div>
                     <div className="gap-4">
-                      <span className="text-gray-300">مكان الفعالية: </span>
-                      <p className="text-sm leading-none text-gray-800">
-                        الزرقاء
-                      </p>
+                      <span className="text-gray-500">عدد ساعات الفعالية:  </span>
+                      <span className="text-sm leading-none text-gray-800">
+                      {data?.eventLength} ساعات
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
-
-            <div className="mt-4 md:mt-6 flex  flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full ">
-              {/* <div className="pb-4 md:pb-8 me-5 w-full md:w-40">
-                                <img className="w-full hidden md:block" src="https://images.pexels.com/photos/16214510/pexels-photo-16214510/free-photo-of-a-decorative-tree-in-a-building-corner.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="dress" />
-                                <img className="w-full md:hidden" src="https://images.pexels.com/photos/16214510/pexels-photo-16214510/free-photo-of-a-decorative-tree-in-a-building-corner.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="dress" />
-                            </div> */}
-              <div className="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-4 mb-4 space-y-4 md:space-y-0">
-                <div className="w-full flex flex-col justify-start items-start space-y-8">
-                  <h3 className="text-xl xl:text-2xl font-semibold leading-6 text-gray-800">
-                    ازرع شجرة
-                  </h3>
-                  <div className="flex justify-start items-start flex-col space-y-2">
-                    {/* <p className="text-sm leading-none text-gray-800">
-                                            <span className="text-gray-300">Color: </span> Light Blue
-                                        </p> */}
-                  </div>
-                </div>
-                <div className="flex justify-between space-x-8 items-start w-full">
-                  {/* <p className="text-base xl:text-lg leading-6">
-                                    $36.00 <span className="text-red-300 line-through"> $45.00</span>
-                                </p> */}
-                  <div className="gap-4">
-                    <span className="text-gray-300">تاريخ الفعالية: </span>
-                    <p className="text-sm leading-none text-gray-800">
-                      12/6/2023
-                    </p>
-                  </div>
-                  <div className="gap-4">
-                    <span className="text-gray-300">مكان الفعالية: </span>
-                    <p className="text-sm leading-none text-gray-800">
-                      الزرقاء
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
+      </div>}
     </div>
+  
+  
+  
+  
+  </>
   );
 };

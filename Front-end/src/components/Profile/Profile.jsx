@@ -13,7 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { PowerIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 
-const Profile = () => {
+const Profile = ({setHideNav}) => {
   const { setAuth } = useContext(AuthContext);
   const { user } = useContext(UserContext);
 
@@ -42,7 +42,7 @@ const Profile = () => {
                 color="green"
                 className="h-5 w-5"
               />
-              <Link to={`/userprofile/${user._id}`}>
+              <Link to={`/userprofile/${user._id}`} onClick={()=> setHideNav(true)}>
                 <Typography variant="small" className="text-black font-bold">
                   صفحتي
                 </Typography>

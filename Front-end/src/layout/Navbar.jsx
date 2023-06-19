@@ -13,7 +13,7 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import Profile from "../components/Profile/Profile";
 
-export default function NavBar() {
+export default function NavBar({hideNav, setHideNav}) {
   const { auth, setAuth } = useContext(AuthContext);
 
   const [openNav, setOpenNav] = useState(false);
@@ -72,7 +72,7 @@ export default function NavBar() {
 
   return (
     <>
-      <Navbar
+   { !hideNav &&   <Navbar
         className="inset-0 z-10 h-max max-w-full rounded-none py-2 px-4"
         dir="rtl"
       >
@@ -83,7 +83,7 @@ export default function NavBar() {
           <div className="flex items-end gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             {auth === true ? (
-              <Profile />
+              <Profile setHideNav={setHideNav} />
             ) : (
               <Link to="/Login">
                 <Button
@@ -149,7 +149,7 @@ export default function NavBar() {
             <span>تسجيل دخول</span>
           </Button>
         </Collapse>
-      </Navbar>
+      </Navbar>}
     </>
   );
 }

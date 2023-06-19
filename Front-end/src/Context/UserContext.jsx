@@ -8,7 +8,7 @@ export default function UserProvider({ children }) {
 
 
   const userRefresh = () => {
-    axios.get(`http://localhost:5501/getUser`, {
+  if(localStorage.getItem("token")) { axios.get(`http://localhost:5501/getUser`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -17,7 +17,7 @@ export default function UserProvider({ children }) {
         console.log(response.data);
         setUser(response.data);
       }
-    }).catch((error) => { console.error(error); });
+    }).catch((error) => { console.error(error); });}
   }
   useEffect(() => {
     userRefresh()
