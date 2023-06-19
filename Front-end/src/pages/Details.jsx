@@ -3,8 +3,10 @@ import Popup from "../components/Details/Popup";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
-function Details() {
+
+function Details(props) {
   const [toggle, setToggle] = useState(false);
   const [eventDataDetails, setEventDataDetails] = useState([])
   const [isloading, setisloading] = useState()
@@ -24,107 +26,125 @@ function Details() {
         console.error("Error fetching data:", error);
       });
   }, [])
+
+  const handleMapClick = () => {
+    // Open Google Maps and get directions
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${eventDataDetails.location[0].lat},${eventDataDetails.location[0].lng}`);
+  };
   return (
     <>
       {isloading != null &&
-        <section>
-          <div className="relative mx-auto max-w-screen-xl px-4 py-8">
-            <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
-                <img
-                  alt="Les Paul"
-                  src={eventDataDetails.image}
-                  className="aspect-square w-full rounded-xl object-cover"
-                />
-              </div>
-              <div className="sticky top-8">
-                <div className="mt-8 flex justify-between" dir="rtl">
-                  <div className="max-w-[35ch] space-y-2">
-                    <h1 className="text-xl font-bold sm:text-2xl text-right">
-                      {eventDataDetails.name}
-                    </h1>
-                  </div>
+        <>
+          <section>
+            <div className="relative mx-auto max-w-screen-xl px-4 py-8">
+              <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
+                  <img
+                    alt="Les Paul"
+                    src={eventDataDetails.image}
+                    className="aspect-square w-full rounded-xl object-cover"
+                  />
                 </div>
-                <div className="mt-4">
-                  <div className="prose max-w-none">
-                    <p className=" text-right">
-                      {eventDataDetails.description}
-                    </p>
+                <div className="sticky top-8">
+                  <div className="mt-8 flex justify-between" dir="rtl">
+                    <div className="max-w-[35ch] space-y-2">
+                      <h1 className="text-xl font-bold sm:text-2xl text-right">
+                        {eventDataDetails.name}
+                      </h1>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <div className="prose max-w-none">
-                    <p className=" text-right">
-                      تاريخ الفعالية : {new Date(eventDataDetails.startDate)?.toISOString().split("T")[0]}
-                    </p>
+                  <div className="mt-4">
+                    <div className="prose max-w-none">
+                      <p className=" text-right">
+                        {eventDataDetails.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <div className="prose max-w-none">
-                    <p className=" text-right">
-                      مدة الفعالية : {eventDataDetails.eventLength} ساعات
-                    </p>
+                  <div className="mt-4">
+                    <div className="prose max-w-none">
+                      <p className=" text-right">
+                        تاريخ الفعالية : {new Date(eventDataDetails.startDate)?.toISOString().split("T")[0]}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <div className="prose max-w-none">
-                    <p className=" text-right">
-                      عدد المتطوعين المطلوبين : {eventDataDetails.maxVolunteers} شخص
-                    </p>
+                  <div className="mt-4">
+                    <div className="prose max-w-none">
+                      <p className=" text-right">
+                        مدة الفعالية : {eventDataDetails.eventLength} ساعات
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <div className="prose max-w-none">
-                    <p className=" text-right">
-                      عدد المتطوعين الى ألان : {eventDataDetails.volunteers.length} شخص
-                    </p>
+                  <div className="mt-4">
+                    <div className="prose max-w-none">
+                      <p className=" text-right">
+                        عدد المتطوعين المطلوبين : {eventDataDetails.maxVolunteers} شخص
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <div className="prose max-w-none">
-                    <p className=" text-right">
-                      عدد الاشجار المراد زرعها : {eventDataDetails.numberOfTrees} شجرة
-                    </p>
+                  <div className="mt-4">
+                    <div className="prose max-w-none">
+                      <p className=" text-right">
+                        عدد المتطوعين الى ألان : {eventDataDetails.volunteers.length} شخص
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <div className="prose max-w-none">
-                    <p className=" text-right">
-                      سعر الشجرة الواحدة : {eventDataDetails.treePrice} دينار
-                    </p>
+                  <div className="mt-4">
+                    <div className="prose max-w-none">
+                      <p className=" text-right">
+                        عدد الاشجار المراد زرعها : {eventDataDetails.numberOfTrees} شجرة
+                      </p>
+                    </div>
                   </div>
-                </div>
+                  <div className="mt-4">
+                    <div className="prose max-w-none">
+                      <p className=" text-right">
+                        سعر الشجرة الواحدة : {eventDataDetails.treePrice} دينار
+                      </p>
+                    </div>
+                  </div>
 
-                <form className="mt-8">
-                  <div className="mt-8 flex  justify-end gap-4">
-                    {eventDataDetails.donations < (eventDataDetails.numberOfTrees * eventDataDetails.treePrice) && <Link to={`/Payment/${eventDataDetails._id}`}>
-                      <button
-                        type="submit"
-                        className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
-                      >
-                        تبرع الان
-                      </button>
-                    </Link>
-                    }
-
-                    {/* Modal toggle */}
-                    {eventDataDetails.maxVolunteers != eventDataDetails.volunteers.length &&
-                      <Link
-                        className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
-                        type="button"
-                        onClick={auth ? handlePopup : undefined}
-                        to={auth ? undefined : '/Login'}
-                        data-modal-toggle="authentication-modal"
-                      >
-                        تطوع الآن
+                  <form className="mt-8">
+                    <div className="mt-8 flex  justify-end gap-4">
+                      {eventDataDetails.donations < (eventDataDetails.numberOfTrees * eventDataDetails.treePrice) && <Link to={`/Payment/${eventDataDetails._id}`}>
+                        <button
+                          type="submit"
+                          className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
+                        >
+                          تبرع الان
+                        </button>
                       </Link>
-                    }
-                  </div>
-                </form>
+                      }
+
+                      {/* Modal toggle */}
+                      {eventDataDetails.maxVolunteers != eventDataDetails.volunteers.length &&
+                        <Link
+                          className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
+                          type="button"
+                          onClick={auth ? handlePopup : undefined}
+                          to={auth ? undefined : '/Login'}
+                          data-modal-toggle="authentication-modal"
+                        >
+                          تطوع الآن
+                        </Link>
+                      }
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
-          </div >
-        </section >
+            </div >
+          </section >
+          <div class="relative w-full h-96">
+            <Map
+              google={props.google}
+              zoom={17}
+              style={{ width: '100%', height: '400px' }}
+              initialCenter={{ lat: eventDataDetails.location[0].lat, lng: eventDataDetails.location[0].lng }}
+              onClick={handleMapClick} // Add onClick event handler
+            >
+              <Marker position={{ lat: eventDataDetails.location[0].lat, lng: eventDataDetails.location[0].lng }} />
+            </Map>
+          </div>
+        </>
       }
 
       <Popup toggle={toggle} setToggle={setToggle} />
@@ -133,7 +153,9 @@ function Details() {
   );
 }
 
-export default Details;
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyCin20Um_kf5R-sj9QADNLFA_Kro06A8Mw'
+})(Details);
 
 
 
