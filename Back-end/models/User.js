@@ -33,6 +33,7 @@ const UserSchema = new mongoose.Schema(
     resetPasswordExpire: Date,
     volunteering: [{ eventName: String }],
     payment: [{ date: String, amount: Number, eventName: String }],
+    active: {type: Boolean, default: true }
   },
   
   {
