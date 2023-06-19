@@ -97,7 +97,7 @@ function Details() {
 
                 <form className="mt-8">
                   <div className="mt-8 flex  justify-end gap-4">
-                    <Link to={`/Payment/${eventDataDetails._id}`}>
+                    {eventDataDetails.donations < (eventDataDetails.numberOfTrees * eventDataDetails.treePrice) && <Link to={`/Payment/${eventDataDetails._id}`}>
                       <button
                         type="submit"
                         className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
@@ -105,25 +105,29 @@ function Details() {
                         تبرع الان
                       </button>
                     </Link>
+                    }
+
                     {/* Modal toggle */}
-                    <Link
-                      className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
-                      type="button"
-                      onClick={auth ? handlePopup : undefined}
-                      to={auth ? undefined : '/Login'}
-                    data-modal-toggle="authentication-modal"
-                    >
-                    تطوع الآن
-                  </Link>
+                    {eventDataDetails.maxVolunteers != eventDataDetails.volunteers.length &&
+                      <Link
+                        className="block rounded bg-green-600 px-5 py-3 text-lg font-medium text-white hover:bg-green-500"
+                        type="button"
+                        onClick={auth ? handlePopup : undefined}
+                        to={auth ? undefined : '/Login'}
+                        data-modal-toggle="authentication-modal"
+                      >
+                        تطوع الآن
+                      </Link>
+                    }
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
-        </div>
+            </div>
           </div >
         </section >
       }
 
-<Popup toggle={toggle} setToggle={setToggle} />
+      <Popup toggle={toggle} setToggle={setToggle} />
     </>
 
   );

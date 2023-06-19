@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const  Schema  = mongoose.Schema;
-
+const donationSchema = new Schema({
+  email: String,
+  amount: Number
+});
 const eventSchema = new Schema({
   name: {
     type: String,
@@ -36,13 +39,14 @@ const eventSchema = new Schema({
   },
   donations: {
     type: Number,
+    default: 0,
   },
   active: {
     type: Boolean,
     default: true,
   },
   donators: {
-    type: [{ email: String, amount: Number }],
+    type: [donationSchema]
   },
   volunteers: {
     type: [{ email: String }],

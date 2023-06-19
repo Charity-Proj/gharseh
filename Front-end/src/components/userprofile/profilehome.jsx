@@ -13,8 +13,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export const Profilehome = () => {
-  const userData = useContext(UserContext);
-  const userId = userData.user._id;
+  const {user, setUser, userRefresh} = useContext(UserContext);
+  const userId = user._id;
   console.log(userId);
 
   const [userName, setuserName] = useState("");
@@ -32,6 +32,7 @@ export const Profilehome = () => {
         phoneNumber,
       });
       console.log(data);
+      userRefresh()
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +57,7 @@ export const Profilehome = () => {
                   الاسم الكامل
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {userData.user.username}
+                  {user.username}
                 </dd>
               </div>
               <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -64,7 +65,7 @@ export const Profilehome = () => {
                   البريد الالكتروني
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {userData.user.email}
+                  {user.email}
                 </dd>
               </div>
               <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -72,7 +73,7 @@ export const Profilehome = () => {
                   رقم الهاتف
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  (962) 078-456-7890
+                  {user.phoneNumber}
                 </dd>
               </div>
               {/* <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -112,7 +113,7 @@ export const Profilehome = () => {
                     </label>
                     <input
                       id="username"
-                      placeholder={userData.user.username}
+                      placeholder={user.username}
                       onChange={(e) => {
                         setuserName(e.target.value);
                       }}
@@ -128,7 +129,7 @@ export const Profilehome = () => {
                     </label>
                     <input
                       id="username"
-                      placeholder={userData.user.phoneNumber}
+                      placeholder={user.phoneNumber}
                       onChange={(e) => {
                         setphoneNumber(e.target.value);
                       }}
@@ -145,7 +146,9 @@ export const Profilehome = () => {
                         className="text-sm"
                         variant="gradient"
                         color="green"
-                        onClick={handleOpen}
+                        onClick={()=>{
+                          handleOpen();
+                        }}
                       >
                         <span>تحديث</span>
                       </Button>

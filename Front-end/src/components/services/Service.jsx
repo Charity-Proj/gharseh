@@ -1,4 +1,4 @@
-import { Progress } from "@material-tailwind/react";
+import { Progress,Typography } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -14,7 +14,6 @@ const Service = ({ search }) => {
       }).catch((error) => {
         console.error("Error fetching data:", error);
       });
-    console.log(eventData);
   }, [])
   return (
     <div className="grid bg-green-50 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-10 md:px-20" dir="rtl">
@@ -33,21 +32,23 @@ const Service = ({ search }) => {
                 <div className="text-5xl font-medium text-gray-800  mb-3">
                   {event.name}
                 </div>
-                <p className="text-gray-600 text-sm">
-                  {/* {event.description} */}
-                </p>
                 <p className="text-gray-600 mb-1 text-sm">الهدف : زراعة {event.numberOfTrees} شجرة</p>
-                <p className="text-gray-600 mb-1 text-sm">المبلغ: {"5"} دينار من {event.numberOfTrees * event.treePrice} دينار</p>
-                <Progress value={(5 / (event.numberOfTrees * event.treePrice)) * 100} color="green" className="bg-green-200" />
+                <p className="text-gray-600 mb-1 text-sm">المبلغ: {event.donations} دينار من {event.numberOfTrees * event.treePrice} دينار</p>
+                {/* <div className="flex items-center justify-between gap-4 mb-2">
+                  <Typography color="blue" variant="h6">Completed</Typography>
+                  <Typography color="blue" variant="h6">{(event.donations / (event.numberOfTrees * event.treePrice)) * 100}%</Typography>
+                </div> */}
+                <Progress value={(event.donations / (event.numberOfTrees * event.treePrice)) * 100}label={(event.donations / (event.numberOfTrees * event.treePrice)) * 100}  color="green" size="md" className="bg-green-200" />
                 <div className="flex gap-3 max-w-sm mt-2">
                   <Link to={`/Details/${event._id}`}>
                     <button className="py-2.5 px-6 rounded-lg text-sm font-bold bg-green-200 text-teal-800">
                       تفاصيل
                     </button>
                   </Link>
-                  <Link to={`/Payment/${event._id}`}><button className="py-2.5 px-6 rounded-lg text-sm font-bold text-white bg-green-600">
+                  {event.donations < (event.numberOfTrees * event.treePrice) && <Link to={`/Payment/${event._id}`}><button className="py-2.5 px-6 rounded-lg text-sm font-bold text-white bg-green-600">
                     تبرع الآن
                   </button></Link>
+                  }
                 </div>
               </div>
             </div>
@@ -65,21 +66,19 @@ const Service = ({ search }) => {
                 <div className="text-5xl font-medium text-gray-800  mb-3">
                   {event.name}
                 </div>
-                <p className="text-gray-600 text-sm">
-                  {event.description}
-                </p>
                 <p className="text-gray-600 mb-1 text-sm">الهدف : زراعة {event.numberOfTrees} شجرة</p>
-                <p className="text-gray-600 mb-1 text-sm">المبلغ: {"5"} دينار من {event.numberOfTrees * event.treePrice} دينار</p>
-                <Progress value={(5 / (event.numberOfTrees * event.treePrice)) * 100} color="green" className="bg-green-200" />
+                <p className="text-gray-600 mb-1 text-sm">المبلغ: {event.donations} دينار من {event.numberOfTrees * event.treePrice} دينار</p>
+                <Progress value={(event.donations / (event.numberOfTrees * event.treePrice)) * 100} color="green" className="bg-green-200" />
                 <div className="flex gap-3 max-w-sm mt-2">
                   <Link to={`/Details/${event._id}`}>
                     <button className="py-2.5 px-6 rounded-lg text-sm font-bold bg-green-200 text-teal-800">
                       تفاصيل
                     </button>
                   </Link>
-                  <Link to={`/Payment/${event._id}`}><button className="py-2.5 px-6 rounded-lg text-sm font-bold text-white bg-green-600">
+                  {event.donations < (event.numberOfTrees * event.treePrice) && <Link to={`/Payment/${event._id}`}><button className="py-2.5 px-6 rounded-lg text-sm font-bold text-white bg-green-600">
                     تبرع الآن
                   </button></Link>
+                  }
                 </div>
               </div>
             </div>

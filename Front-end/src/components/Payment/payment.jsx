@@ -1,13 +1,20 @@
 import Hero from "./visa.png";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { UserContext } from "../../Context/UserContext";
+import Swal from 'sweetalert2';
 export default function payment() {
+  const { user, setUser, userRefresh } = useContext(UserContext)
+  const { id } = useParams()
+  const Navigate = useNavigate()
   const [formData, setFormData] = useState({
+    email: user.email,
     cardNumber: "",
     cardHolder: "",
     cvc: "",
     expiryDate: "",
+    amount: ''
   });
   const [errors, setErrors] = useState({});
 
@@ -16,6 +23,7 @@ export default function payment() {
       ...formData,
       [event.target.name]: event.target.value,
     });
+    console.log(user);
   };
 
   const validateForm = () => {
@@ -44,6 +52,8 @@ export default function payment() {
       errors.expiryDate = "تاريخ الانتهاء مطلوب";
     } else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
       errors.expiryDate = "تاريخ الانتهاء غير صحيح";
+    } else if (!(parseInt(formData.expiryDate.split("/")[1]) >= 23)) {
+      errors.expiryDate = "تاريخ انتهاء البطاقة غير صحيح";
     }
 
     return errors;
@@ -54,24 +64,26 @@ export default function payment() {
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
       try {
-        // Send the form data to the server
         const userData = {
+          email:formData.email,
           cardNumber: formData.cardNumber,
           cardHolder: formData.cardHolder,
           cvc: formData.cvc,
           expiryDate: formData.expiryDate,
+          amount: formData.amount
         };
-        const response = await axios.post(
-          "http://localhost:5501/api/Payment",
+        axios.post(
+          `http://localhost:5501/api/Payment/${id}`,
           userData
-        );
-        console.log(response.data);
-        setErrors("");
-        setFormData({
-          cardNumber: "",
-          cardHolder: "",
-          cvc: "",
-          expiryDate: "",
+        ).then((res) => {
+          console.log(res.data);
+          Swal.fire({
+            title: "شكراً لك على التبرع",
+            icon: 'success',
+            confirmButtonColor:'green'
+          })
+          // Navigate('/')
+          setErrors("");
         });
       } catch (error) {
         console.log("Error:", error.message);
@@ -212,8 +224,11 @@ export default function payment() {
                 </label>
                 <input
                   class="w-25 py-3 me-5 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow dark:bg-gray-600 dark:text-gray-100"
-                  type="text"
+                  type="number"
                   dir="rtl"
+                  name="amount"
+                  value={formData.amount}
+                  onChange={handleChange}
                 />
                 <label class="text-gray-600 dark:text-gray-400 me-6">
                   دينار{" "}

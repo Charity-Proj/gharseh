@@ -33,23 +33,10 @@ export default function Login() {
         // Perform validation checks
 
         if (!formData.email) {
-            errors.email = 'البريد الإلكتروني مطلوب';
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            errors.email = 'البريد الإلكتروني غير صالح';
-        }
-
-
-        if (!formData.password) {
+            errors.password = 'البريد الإلكتروني مطلوب';
+        }else if (!formData.password) {
             errors.password = 'كلمة المرور مطلوبة';
-        } else if (formData.password.length < 6) {
-            errors.password = 'يجب أن تحتوي كلمة المرور على الأقل 6 أحرف';
-        } else if (!/^[a-zA-Z0-9!@#$%^&*]+$/.test(formData.password)) {
-            errors.password = 'يجب أن تحتوي كلمة المرور على أحرف إنجليزية وأرقام وحروف مميزة';
-        } else if (!/\d/.test(formData.password)) {
-            errors.password = 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل';
-        } else if (!/[!@#$%^&*]/.test(formData.password)) {
-            errors.password = 'يجب أن تحتوي كلمة المرور على حرف خاص واحد (!@#$%^&*) على الأقل';
-        }
+        } 
         return errors;
     };
 
@@ -80,6 +67,7 @@ export default function Login() {
                 });
             } catch (error) {
                 console.log('Error:', error.message);
+                setErrors({password:'البريد الإلكتروني او كلمة السر غير صحيحة '})
             }
         } else {
             setErrors(errors);
@@ -113,7 +101,7 @@ export default function Login() {
                                             onChange={handleChange} id="username" className="border-b-2 appearance-none  text-right pr-10 border-black  w-full py-2 px-4 outline-none text-gray-700 leading-tight   focus:border-b-green-500" placeholder="البريد الاكتروني" />
                                         <svg className="absolute ml-[30rem] w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.329v12.501l6.575-7.172zm10.85 0l6.575 7.172v-12.501l-6.575 5.329zm-1.557 1.261l-3.868 3.135-3.868-3.135-8.11 8.848h23.956l-8.11-8.848z" /></svg>
                                     </div>
-                                    <div className='w-full flex items-end  mr-2 justify-end'>{errors.email && <span className='text-red-600'>{errors.email}</span>}</div>
+                                   
                                 </div>
 
                                 <div className='flex flex-col mt-6 w-full'>
@@ -125,7 +113,7 @@ export default function Login() {
                                             <svg className="absolute ml-[30rem] w-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 17c0 .552-.447 1-1 1s-1-.448-1-1 .447-1 1-1 1 .448 1 1zm3 0c0 .552-.447 1-1 1s-1-.448-1-1 .447-1 1-1 1 .448 1 1zm3 0c0 .552-.447 1-1 1s-1-.448-1-1 .447-1 1-1 1 .448 1 1zm2-7v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.795-4 4-4s4 1.794 4 4v4h-8v-4zm11 16h-14v-10h14v10z" /></svg>
                                         </div>
                                     </div>
-                                    <div className='w-full flex items-end   mr-2 justify-end'>{errors.password && <span className='text-red-600'>{errors.password}</span>}</div>
+                                    <div className='w-full flex items-end  mt-2 mr-2 justify-end'>{errors.password && <span className='text-red-600'>{errors.password}</span>}</div>
                                 </div>
                                 <div className="mb-6 flex items-center justify-between mt-5">
 
