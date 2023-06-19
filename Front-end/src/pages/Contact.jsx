@@ -1,16 +1,25 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 function ContactUs() {
-
+  const Navigate = useNavigate()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    
+    axios.post('http://localhost:5501/api/message',{name,email,phone,message})
+    .thensole.log(res);
+      Swn(((res)=>{
+      coal.fire({
+        title: "شكراً لك سيتم الرد عليك بأقرب وقت",
+        icon: 'success',
+        confirmButtonColor:'green'
+      })
+      Navigate('/')
+    }))
   };
 
   return (
