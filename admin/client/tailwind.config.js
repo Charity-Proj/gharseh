@@ -14,7 +14,7 @@ export default {
   plugins: [require("flowbite/plugin"), require("daisyui")],
   daisyui: {
     styled: true,
-    themes: false,
+    themes:  ["light"],
     base: true,
     utils: true,
     logs: true,
