@@ -32,22 +32,7 @@ const updateUser= async (req, res) => {
     }
   }
 
-// const updateUser = async (req, res) => {
-//     if (!req?.body?.id) {
-//         return res.status(400).json({ 'message': 'ID parameter is required.' });
-//     }
 
-//     const user = await User.findOne({ _id: req.body.id }).exec();
-
-//     if (!user) {
-//         return res.status(204).json({ "message": `No User matches ID ${req.body.id}.` });
-//     }
-
-//     if (req.body?.userName) user.username = req.body.userName;
-//     if (req.body?.phoneNumber) user.phonenumber = req.body.phoneNumber;
-//     const result = await user.save();
-//     res.json(result);
-// }
 
 // Retrieve specific user data
 const getOneUser = async (req, res) => {

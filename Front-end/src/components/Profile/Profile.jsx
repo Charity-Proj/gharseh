@@ -31,7 +31,7 @@ const Profile = ({setHideNav}) => {
             <Avatar
               variant="circular"
               alt="candice wu"
-              className="cursor-pointer w-10 h-10"
+              className="cursor-pointer w-12 h-12"
               src="https://icon-library.com/images/my-profile-icon-png/my-profile-icon-png-24.jpg"
             />
           </MenuHandler>

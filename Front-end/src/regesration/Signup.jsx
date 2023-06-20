@@ -239,9 +239,11 @@ export default function SignUp() {
                   <span className="absolute bottom-0 right-0 w-8 h-20 -mb-8 -mr-5 transition-all duration-300 ease-out transform rotate-45 translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
                   <span className="absolute top-0 left-0 w-20 h-8 -mt-1 -ml-12 transition-all duration-300 ease-out transform -rotate-45 -translate-x-1 bg-white opacity-10 group-hover:translate-x-0"></span>
                   <span className="relative z-20 flex items-center text-sm">
+                    انشاء حساب
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="relative  w-5 h-5 mr-2 text-white"
+                      className="relative  w-5 h-5 text-white"
+                      style={{marginLeft: "1rem"}}
                       viewBox="0 0 256 256"
                     >
                       <rect width="256" height="256" fill="none" />
@@ -287,7 +289,6 @@ export default function SignUp() {
                         stroke-width="12"
                       />
                     </svg>
-                    انشاء حساب
                   </span>
                 </button>
               </form>

@@ -73,16 +73,16 @@ function Details(props) {
                     </Typography>
                   </div>
                   <Typography variant="h5" color="blue-gray">
-                    {eventDataDetails?.eventLength} ساعات
+                    {eventDataDetails?.eventLength} ساعة
                   </Typography>
                 </figcaption>
               </figure>
 
               <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 md:px-24 md:py-16 lg:px-8 lg:py-20">
-                <div className="row-gap-8 grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-4">
+                <div className="row-gap-6 grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-4">
                   <div className="mb-12 text-center md:mb-0 md:border-r-2 dark:md:border-slate-500">
                     <div className="font-heading text-[2.6rem] text-green-500 font-bold dark:text-white lg:text-3xl xl:text-2xl">
-                      {eventDataDetails?.maxVolunteers} اشخاص
+                      {eventDataDetails?.maxVolunteers} 
                     </div>
                     <p className="text-sm font-medium uppercase  text-gray-800 dark:text-slate-400 lg:text-base">
                       عدد المتطوعين المطلوبين
@@ -90,7 +90,7 @@ function Details(props) {
                   </div>
                   <div className="mb-12 text-center md:mb-0 md:border-r-2 dark:md:border-slate-500">
                     <div className="font-heading text-[2.6rem] font-bold text-green-500 dark:text-white lg:text-3xl xl:text-2xl">
-                      {eventDataDetails?.volunteers?.length} اشخاص
+                      {eventDataDetails?.volunteers?.length} 
                     </div>
                     <p className="text-sm font-medium uppercase  text-gray-800 dark:text-slate-400 lg:text-base">
                       عدد المتطوعين الى الآن
@@ -98,7 +98,7 @@ function Details(props) {
                   </div>
                   <div className="mb-12 text-center md:mb-0 md:border-r-2 dark:md:border-slate-500">
                     <div className="font-heading text-[2.6rem] font-bold text-green-500 dark:text-white lg:text-3xl xl:text-2xl">
-                      {eventDataDetails?.numberOfTrees} شجرة
+                      {eventDataDetails?.numberOfTrees} 
                     </div>
                     <p className="text-sm font-medium uppercase  text-gray-800 dark:text-slate-400 lg:text-base">
                       عدد الاشجار المراد زرعها
@@ -106,7 +106,7 @@ function Details(props) {
                   </div>
                   <div className="mb-12 text-center md:mb-0 md:border-r-2 dark:md:border-slate-500">
                     <div className="font-heading text-[2.6rem] font-bold text-green-500 dark:text-white lg:text-3xl xl:text-2xl">
-                      {eventDataDetails?.treePrice} دنانير
+                      {eventDataDetails?.treePrice} د
                     </div>
                     <p className="text-sm font-medium uppercase  text-gray-800 dark:text-slate-400 lg:text-base">
                       سعر الشجرة الواحدة

@@ -17,7 +17,6 @@ const Hero = ({ search, setSearch }) => {
         <div className="relative z-30 text-base text-black" dir="rtl">
           <input
             type="text"
-            defaultValue=""
             placeholder="ابحث"
             className="mt-2 shadow-md border-2 border-green-500 focus:shadow focus:outline-none focus:border-green-500 rounded-2xl py-3 px-6 block w-full"
             value={search}

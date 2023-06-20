@@ -33,7 +33,7 @@ export default function NavBar({hideNav, setHideNav}) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="/" className="flex items-center text-lg font-bold">
+        <Link to="/" className="flex items-center text-lg font-bold active:text-green-500 focus:text-green-500">
           الرئيسية
         </Link>
       </Typography>
@@ -43,7 +43,7 @@ export default function NavBar({hideNav, setHideNav}) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="/Services" className="flex items-center text-lg font-bold">
+        <Link to="/Services" className="flex items-center text-lg font-bold active:text-green-500 focus:text-green-500">
           الفعاليات
         </Link>
       </Typography>
@@ -53,7 +53,7 @@ export default function NavBar({hideNav, setHideNav}) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="/About" className="flex items-center text-lg font-bold">
+        <Link to="/About" className="flex items-center text-lg font-bold active:text-green-500 focus:text-green-500">
           قصتنا
         </Link>
       </Typography>
@@ -63,7 +63,7 @@ export default function NavBar({hideNav, setHideNav}) {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="/Contact" className="flex items-center text-lg font-bold">
+        <Link to="/Contact" className="flex items-center text-lg font-bold active:text-green-500 focus:text-green-500">
           اتصل بنا
         </Link>
       </Typography>
@@ -82,20 +82,7 @@ export default function NavBar({hideNav, setHideNav}) {
           </Typography>
           <div className="flex items-end gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-            {auth === true ? (
-              <Profile setHideNav={setHideNav} />
-            ) : (
-              <Link to="/Login">
-                <Button
-                  variant="gradient"
-                  size="sm"
-                  color="green"
-                  className="hidden lg:inline-block bg-green-500"
-                >
-                  <span>تسجيل دخول</span>
-                </Button>
-              </Link>
-            )}
+            
             <IconButton
               variant="text"
               className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -134,20 +121,40 @@ export default function NavBar({hideNav, setHideNav}) {
               )}
             </IconButton>
           </div>
-          <div className="lg:block hidden" width="15px"></div>
+          <div className="lg:block hidden" width="15px">
+          {auth === true ? (
+              <Profile setHideNav={setHideNav} />
+            ) : (
+              <Link to="/Login">
+                <Button
+                  variant="gradient"
+                  size="sm"
+                  color="green"
+                  className="hidden lg:inline-block bg-green-500"
+                >
+                  <span>تسجيل دخول</span>
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
 
         <Collapse open={openNav}>
           {navList}
-          <Button
-            variant="gradient"
-            color="green"
-            size="sm"
-            fullWidth
-            className="bg-green-500 mb-2"
-          >
-            <span>تسجيل دخول</span>
-          </Button>
+          {auth === true ? (
+              <Profile setHideNav={setHideNav} />
+            ) : (
+              <Link to="/Login">
+                <Button
+                  variant="gradient"
+                  size="sm"
+                  color="green"
+                  className="hidden lg:inline-block bg-green-500"
+                >
+                  <span>تسجيل دخول</span>
+                </Button>
+              </Link>
+            )}
         </Collapse>
       </Navbar>}
     </>

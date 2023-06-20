@@ -72,14 +72,14 @@ const Service = ({ search }) => {
                     </p>
                     <Progress
                       value={
-                        (event.donations /
+                       parseInt( (event.donations /
                           (event.numberOfTrees * event.treePrice)) *
-                        100
+                        100)
                       }
                       label={
-                        (event.donations /
+                        parseInt((event.donations /
                           (event.numberOfTrees * event.treePrice)) *
-                        100
+                        100)
                       }
                       color="green"
                       size="md"
@@ -112,7 +112,7 @@ const Service = ({ search }) => {
               key={event._id}
             >
               <div className="relative">
-                <img className="w-full h-96 object-cover" src={event.image} />
+                <img className="w-full h-72 object-cover" src={event.image} />
               </div>
               <div className="p-4">
                 <div className="text-5xl font-medium text-gray-800  mb-3">
@@ -126,14 +126,20 @@ const Service = ({ search }) => {
                   {event.numberOfTrees * event.treePrice} دينار
                 </p>
                 <Progress
-                  value={
-                    (event.donations /
-                      (event.numberOfTrees * event.treePrice)) *
-                    100
-                  }
-                  color="green"
-                  className="bg-green-200"
-                />
+                      value={
+                       parseInt( (event.donations /
+                          (event.numberOfTrees * event.treePrice)) *
+                        100)
+                      }
+                      label={
+                        parseInt((event.donations /
+                          (event.numberOfTrees * event.treePrice)) *
+                        100)
+                      }
+                      color="green"
+                      size="md"
+                      className="bg-green-200"
+                    />
                 <div className="flex gap-3 max-w-sm mt-2">
                   <Link to={`/Details/${event._id}`}>
                     <button className="py-2.5 px-6 rounded-lg text-sm font-bold bg-green-200 text-teal-800">

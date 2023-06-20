@@ -103,7 +103,7 @@ const Popup = ({ toggle, setToggle }) => {
             >
               <div className="relative w-full max-w-md px-4 h-full md:h-auto">
                 {/* Modal content */}
-                <div className="bg-white rounded-lg shadow relative left-[35rem] top-20 dark:bg-gray-700">
+                <div className="bg-white rounded-lg shadow relative w-[39rem] left-[28rem] top-20 dark:bg-gray-700">
                   <div className="flex justify-end p-2" dir='rtl'>
                     <button
                       type="button"
@@ -205,7 +205,7 @@ const Popup = ({ toggle, setToggle }) => {
                         name="gender"
                         value={formData.gender}
                         onChange={handleChange}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 ps-8 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       >
                         <option value="none"></option>
                         <option value="female">ذكر</option>

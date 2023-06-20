@@ -112,7 +112,7 @@ export default function payment() {
           >
             <p className="text-3xl font-bold text-right">تفاصيل الدفع </p>
             <p className="text-green-400 text-xl font-bold text-right">
-              !تبرع الآن ولنجعل العالم افضل معا
+            تبرع الان لنزيد مساحاتنا الخضراء
             </p>
             <div className="">
               <label className="mt-4 mb-2 block text-xl font-bold text-right">

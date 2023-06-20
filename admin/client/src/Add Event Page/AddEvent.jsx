@@ -141,6 +141,7 @@ export const AddEvent = () => {
         locationName: selectedLocation,
       });
       console.log(response);
+      
     } catch (error) {
       console.log(error);
     }

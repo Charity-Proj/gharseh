@@ -1,4 +1,4 @@
-# gharseh
+# Gharseh غرسة
 ### Gharseh is a site for collecting donations, and these donations are converted into trees that are planted in locations that are specified within the events announced on the site. You can also volunteer through the site to plant trees in specific events.
 
 - #### Project Team ![](./Front-end/src/assets/teamwork.png)

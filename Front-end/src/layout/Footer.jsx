@@ -39,8 +39,8 @@ export const Footer = ({hideNav}) => {
           </div>
         </div>
         {/* Main container div: holds the entire content of the footer, including four sections (Tailwind Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. */}
-        <div className="mx-6 py-10 text-center md:text-left">
-          <div className="grid-1 grid gap-8 md:grid-cols-3 lg:grid-cols-3">
+        <div className="mx-6 py-2 text-center md:text-left">
+          <div className="grid-1 grid gap-8 md:grid-cols-4 lg:grid-cols-4">
             {/* Tailwind Elements section */}
             <div className>
               <h6 className="mb-4 flex items-center  justify-center font-semibold uppercase md:justify-start text-white">
@@ -102,6 +102,12 @@ export const Footer = ({hideNav}) => {
                 236 7258 077 962+
               </p>
             </div>
+            <div class="p-5 w-auto">
+            <h3 class="font-bold text-start text-lg text-green-600 mb-4">اشترك معنا</h3>
+            <form class="mt-4">
+                <input class="border rounded w-full px-4 py-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="البريد الإلكتروني"/>
+            </form>
+        </div>
           </div>
         </div>
         {/*Copyright section*/}

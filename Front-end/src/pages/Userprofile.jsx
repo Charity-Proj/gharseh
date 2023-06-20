@@ -10,6 +10,7 @@ import { VolunteerHistory } from "../components/userprofile/volunteerHistory";
 import { UserContext } from "../Context/UserContext";
 import { AuthContext } from "../Context/AuthContext";
 // import { findEventsByDonatorEmail } from '../../../Back-end/controllers/events';
+import logo from "../assets/logo.png";
 
 const Userprofile = ({ hideNav, setHideNav }) => {
   const ctx = useContext(UserContext);
@@ -79,7 +80,7 @@ const Userprofile = ({ hideNav, setHideNav }) => {
             onClick={() => setHideNav(false)}
             className="self-center text-2xl font-semibold whitespace-nowrap"
           >
-            ☘️ غرسة
+            <img src={logo} alt="logo" className="w-16" />
           </a>
           <br />
           <br />
@@ -90,7 +91,7 @@ const Userprofile = ({ hideNav, setHideNav }) => {
                 onClick={() => setHideNav(false)}
                 className="flex items-center p-2 rounded-lg hover:bg-black -100 dark:hover:bg-black-700"
               >
-                <FaUser className="w-5 h-5 me-4" style={{ color: "#54B435" }} />
+                <AiFillHome className="w-5 h-5 me-4" style={{ color: "#54B435" }} />
                 <span className="ml-3">الصفحة الرئيسية</span>
               </a>
             </li>
