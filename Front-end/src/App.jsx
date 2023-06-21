@@ -41,10 +41,10 @@ function App() {
             <Route path='/services' element={<Services />} />
             <Route path="/Signup" element={<Home />} />
             <Route path="/Login" element={<Home />} />
-            <Route path="/ForgotPassword" element={<Home />} />
-            <Route path="/Passwordrest/:resetToken" element={<Home />} />
             <Route path="/Payment/:id" element={<Payment />} />
             <Route path='/userprofile/:id' element={<Userprofile hideNav={hideNav} setHideNav={setHideNav} />} />
+            <Route path="/ForgotPassword" element={<Home />} />
+            <Route path="/Passwordrest/:resetToken" element={<Home />} />
             <Route path="/About" element={<About />} />
             <Route path='/Contact' element={<ContactUs />} />
             <Route path='/Details/:id' element={<Details />} />

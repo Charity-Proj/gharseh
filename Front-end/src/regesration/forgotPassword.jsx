@@ -46,7 +46,7 @@ export default function Login() {
                     'http://localhost:5501/api/forgotPassword',
                     userData
                 );
-                localStorage.setItem('token', response.data.jwttoken);
+                // localStorage.setItem('token', response.data.jwttoken);
                 setErrors('');
                 setFormData({
                     email: '',

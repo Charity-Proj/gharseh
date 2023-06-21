@@ -45,6 +45,7 @@ export default function Login() {
         return errors;
     };
 
+    console.log(resetToken);
     const handleSubmit = async (e) => {
         e.preventDefault();
         const errors = validateForm();
@@ -55,7 +56,7 @@ export default function Login() {
                     password: formData.password,
                 };
                 const response = await axios.put(
-                    `http://localhost:4009/api/resetPassword/${resetToken}`,
+                    `http://localhost:5501/api/resetPassword/${resetToken}`,
                     userData
                 );
                 console.log(response.data);

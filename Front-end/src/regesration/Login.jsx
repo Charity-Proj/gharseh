@@ -13,7 +13,7 @@ export default function Login() {
     let { user, setUser, userRefresh } = useContext(UserContext);
 
     const Navigate = useNavigate();
-
+    const [togglePassword, setTogglePassword] = useState(false)
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -105,16 +105,20 @@ export default function Login() {
                                 </div>
 
                                 <div className='flex flex-col mt-6 w-full'>
-                                    <div className="   ">
+                                    <div className="relative">
                                         <div className="flex items-center text-lg ">
-                                            <input type="password" name="password"
+                                            <input 
+                                            type={togglePassword ? "text" : "password"} 
+                                            name="password"
                                                 value={formData.password}
                                                 onChange={handleChange} id="username" className="border-b-2 appearance-none  text-right pr-10 border-black  w-full py-2 px-4 outline-none text-gray-700 leading-tight   focus:border-b-green-500" placeholder="كلمة المرور  " />
+                                                <i  onClick={() => setTogglePassword(!togglePassword)} id="username" className={togglePassword ? "fa fa-eye-slash cursor-pointer absolute ml-2" : " fa fa-eye cursor-pointer absolute ml-2"} /> 
                                             <svg className="absolute ml-[30rem] w-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 17c0 .552-.447 1-1 1s-1-.448-1-1 .447-1 1-1 1 .448 1 1zm3 0c0 .552-.447 1-1 1s-1-.448-1-1 .447-1 1-1 1 .448 1 1zm3 0c0 .552-.447 1-1 1s-1-.448-1-1 .447-1 1-1 1 .448 1 1zm2-7v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-10-4c0-2.206 1.795-4 4-4s4 1.794 4 4v4h-8v-4zm11 16h-14v-10h14v10z" /></svg>
                                         </div>
                                     </div>
                                     <div className='w-full flex items-end  mt-2 mr-2 justify-end'>{errors.password && <span className='text-red-600'>{errors.password}</span>}</div>
                                 </div>
+    
                                 <div className="mb-6 flex items-center justify-between mt-5">
 
 

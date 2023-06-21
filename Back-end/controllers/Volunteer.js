@@ -18,12 +18,6 @@ exports.Volunteer = async (req, res, next) => {
     const updatedVolunteers = [...event.volunteers, { email }];
     await Event.findByIdAndUpdate(id, { volunteers: updatedVolunteers });
 
-    const volunteer = await Volunteer.create({
-      fullName,
-      email,
-      age,
-      gender,
-    });
     res.json({"success":"get event done"});
   }
   } catch (error) {

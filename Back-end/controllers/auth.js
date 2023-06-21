@@ -119,7 +119,7 @@ exports.forgotPassword = async (req,res,next) => {
         </tr>
     </table>
 </body>
-    `
+    `                       
     try{
       sendEmail({
         to:user.email,
@@ -130,7 +130,7 @@ exports.forgotPassword = async (req,res,next) => {
     }catch(error){
       user.resetPasswordToken = undefined
       user.resetPasswordExpire = undefined
-
+      
       await user.save()
 
       next(new ErrorResponse("email could not be send",500))
